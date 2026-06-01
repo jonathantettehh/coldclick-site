@@ -1,0 +1,987 @@
+<html lang="en" class="scroll-smooth overflow-x-hidden max-w-[100vw]"><head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Agency Name] - Growth Agency Template</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@300;400;500;600&amp;family=Montserrat:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <style>
+      /* Typography overrides */
+      body { font-family: 'Inter', sans-serif; }
+      .font-serif { font-family: 'Instrument Serif', serif; }
+      .font-montserrat { font-family: 'Montserrat', sans-serif; }
+      /* Animations */
+      @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes infinite-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+      }
+      .animate-fade-up {
+      animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      opacity: 0;
+      }
+      .animate-infinite-scroll {
+      animation: infinite-scroll 40s linear infinite;
+      }
+      .delay-100 { animation-delay: 0.1s; }
+      .delay-200 { animation-delay: 0.2s; }
+      .delay-300 { animation-delay: 0.3s; }
+      .delay-500 { animation-delay: 0.5s; }
+      /* Utilities */
+      .glass {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      }
+      .marquee-mask {
+      mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+      }
+      /* Custom FAQ Details Marker removal */
+      details > summary {
+      list-style: none;
+      }
+      details > summary::-webkit-details-marker {
+      display: none;
+      }
+    </style>
+    <meta name="aura-font-heading-class" content="font-sans">
+    <meta name="aura-font-body-class" content="font-manrope">
+    <meta name="aura-font-heading-label" content="Inter">
+    <meta name="aura-font-body-label" content="Manrope">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  <link id="all-fonts-link-font-geist" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist">
+      .font-geist { font-family: 'Geist', sans-serif !important; }
+    </style><link id="all-fonts-link-font-roboto" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-roboto">
+      .font-roboto { font-family: 'Roboto', sans-serif !important; }
+    </style><link id="all-fonts-link-font-montserrat" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-montserrat">
+      .font-montserrat { font-family: 'Montserrat', sans-serif !important; }
+    </style><link id="all-fonts-link-font-poppins" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-poppins">
+      .font-poppins { font-family: 'Poppins', sans-serif !important; }
+    </style><link id="all-fonts-link-font-playfair" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&amp;display=swap"><style id="all-fonts-style-font-playfair">
+      .font-playfair { font-family: 'Playfair Display', serif !important; }
+    </style><link id="all-fonts-link-font-instrument-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-instrument-serif">
+      .font-instrument-serif { font-family: 'Instrument Serif', serif !important; }
+    </style><link id="all-fonts-link-font-merriweather" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&amp;display=swap"><style id="all-fonts-style-font-merriweather">
+      .font-merriweather { font-family: 'Merriweather', serif !important; }
+    </style><link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-bricolage">
+      .font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }
+    </style><link id="all-fonts-link-font-jakarta" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-jakarta">
+      .font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif !important; }
+    </style><link id="all-fonts-link-font-manrope" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-manrope">
+      .font-manrope { font-family: 'Manrope', sans-serif !important; }
+    </style><link id="all-fonts-link-font-space-grotesk" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-space-grotesk">
+      .font-space-grotesk { font-family: 'Space Grotesk', sans-serif !important; }
+    </style><link id="all-fonts-link-font-work-sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-work-sans">
+      .font-work-sans { font-family: 'Work Sans', sans-serif !important; }
+    </style><link id="all-fonts-link-font-pt-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&amp;display=swap"><style id="all-fonts-style-font-pt-serif">
+      .font-pt-serif { font-family: 'PT Serif', serif !important; }
+    </style><link id="all-fonts-link-font-geist-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist-mono">
+      .font-geist-mono { font-family: 'Geist Mono', monospace !important; }
+    </style><link id="all-fonts-link-font-space-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;display=swap"><style id="all-fonts-style-font-space-mono">
+      .font-space-mono { font-family: 'Space Mono', monospace !important; }
+    </style><link id="all-fonts-link-font-quicksand" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-quicksand">
+      .font-quicksand { font-family: 'Quicksand', sans-serif !important; }
+    </style><link id="all-fonts-link-font-nunito" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-nunito">
+      .font-nunito { font-family: 'Nunito', sans-serif !important; }
+    </style><link id="all-fonts-link-font-newsreader" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..800&amp;display=swap"><style id="all-fonts-style-font-newsreader">
+      .font-newsreader { font-family: 'Newsreader', serif !important; }
+    </style><link id="all-fonts-link-font-google-sans-flex" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-google-sans-flex">
+      .font-google-sans-flex { font-family: 'Google Sans Flex', sans-serif !important; }
+    </style><link id="all-fonts-link-font-oswald" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-oswald">
+      .font-oswald { font-family: 'Oswald', sans-serif !important; }
+    </style><link id="all-fonts-link-font-dm-sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-dm-sans">
+      .font-dm-sans { font-family: 'DM Sans', sans-serif !important; }
+    </style><link id="all-fonts-link-font-cormorant" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-cormorant">
+      .font-cormorant { font-family: 'Cormorant Garamond', serif !important; }
+    </style><style id="border-gradient-shared-style">
+  [style*="--border-gradient"]::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: var(--border-radius-before, inherit);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    background: var(--border-gradient);
+    pointer-events: none;
+  }</style></head>
+  <body class="antialiased selection:bg-rose-100 selection:text-rose-900 overflow-x-hidden text-gray-600 bg-[#FAFAFA] max-w-[100vw]">
+    <script>
+      (function(){try{var key='__aura_html_snapshot_1141';if(!window[key]){window[key]=document.documentElement.outerHTML;}window.__aura_restore_1141=function(){try{document.open();document.write(window[key]);document.close();}catch(e){console.warn('Restore failed',e);}};}catch(e){console.warn('Snapshot init failed',e);}})();
+    </script>
+    <!-- 1. Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4 md:pt-6 md:px-6 pointer-events-none">
+      <nav class="pointer-events-auto glass flex gap-4 md:gap-10 transition-all duration-300 w-full max-w-5xl border-gray-200/60 border rounded-full pt-2 pr-2 pb-2 pl-5 shadow-[0_2px_10px_-2px_rgba(0,0,0,0.05)] gap-x-4 gap-y-4 items-center justify-between">
+        <!-- Left: Logo -->
+        <a href="#" class="group flex items-center gap-2 shrink-0">
+          <span class="transition-colors group-hover:text-blue-600 md:text-3xl text-xl font-normal italic text-gray-900 tracking-tight font-serif inline-block">
+            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/e718aed0-12bc-4a23-a7fd-dd4555eb6655_800w.png" alt="Logo Placeholder" class="md:h-9 w-auto h-7 object-cover rounded-sm">
+          </span>
+        </a>
+
+        <!-- Right: Single CTA -->
+        <a href="#book-call" class="md:px-5 md:py-2.5 transition-all duration-300 flex items-center gap-2 group hover:shadow-lg shrink-0 hover:shadow-blue-500/20 hover:bg-blue-700 font-medium text-white font-manrope bg-blue-500 rounded-full pt-2 pr-4 pb-2 pl-4 shadow-md text-sm md:text-xs">
+          Get Started
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" aria-hidden="true" class="lucide lucide-arrow-right w-3 h-3 transition-transform group-hover:translate-x-0.5 hidden sm:block"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+        </a>
+      </nav>
+    </header>
+
+    <main class="md:pt-32 md:px-6 max-w-7xl mr-auto ml-auto pt-28 pr-4 pb-24 pl-4">
+      <!-- 2. Hero Section -->
+      <section class="md:rounded-[2.5rem] md:p-12 lg:p-20 overflow-hidden md:mb-16 text-center bg-white border-gray-200/60 border rounded-[2rem] mb-12 pt-12 pr-6 pb-12 pl-6 relative shadow-[0_1px_2px_rgba(0,0,0,0.02)]" id="home">
+        <!-- Background Grid -->
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:3rem_3rem] md:bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none opacity-50"></div>
+
+        <div class="z-10 flex flex-col max-w-5xl mr-auto ml-auto relative items-center">
+          <!-- Eyebrow -->
+          <div class="animate-fade-up text-[8px] sm:text-[10px] uppercase md:mb-8 font-bold text-blue-700 tracking-widest bg-red-100 w-fit border-blue-100 border rounded-full mb-6 py-1 px-2.5 sm:pt-1 sm:pr-3 sm:pb-1 sm:pl-3 font-manrope">
+            ATTENTION B2B FOUNDERS &amp; REVENUE LEADERS
+          </div>
+
+          <!-- Main Headline -->
+          <h1 class="animate-fade-up delay-100 leading-tight md:leading-[1.1] md:mb-6 md:text-5xl lg:text-6xl text-4xl font-medium text-gray-900 tracking-tighter font-serif text-center max-w-4xl mr-auto mb-4 ml-auto">
+            <span class="block md:mb-5 mb-3">
+              We book you
+              <span class="italic border-b-2 md:border-b-4 border-blue-200/60 text-gray-900 pb-1">
+                qualified sales calls.
+              </span>
+            </span>
+            <span class="block mb-3 md:mb-5">
+              You only pay
+              <span class="md:border-b-4 italic text-gray-900 border-blue-200/60 border-b-2 pb-1">
+                when they show up
+              </span>
+              and
+            </span>
+            <span class="block">
+              your AEs
+              <span class="italic border-b-2 md:border-b-4 border-blue-200/60 pb-1">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-blue-400">
+                  accept them into pipeline.
+                </span>
+              </span>
+            </span>
+          </h1>
+
+          <!-- Tagline -->
+          <p class="animate-fade-up delay-200 md:text-lg md:mb-12 leading-relaxed text-sm font-light text-gray-500 font-manrope text-center max-w-2xl mr-auto mb-8 ml-auto">
+            Our Revenue-First Outbound system prioritizes reducing your
+            time-to-revenue, so you only pay us when a clear return on
+            investment is within reach.
+          </p>
+
+          <!-- Video Box -->
+          <div class="animate-fade-up delay-300 aspect-video md:rounded-[2rem] md:border-4 md:shadow-2xl overflow-hidden md:mb-12 group cursor-pointer shadow-gray-200 bg-blue-500 w-full max-w-[52rem] border-white/50 border-2 ring-gray-900/5 ring-1 rounded-xl mb-8 relative shadow-xl">
+            <!-- Thumbnail Image -->
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&amp;fit=crop&amp;q=80&amp;w=2426" alt="Process Video" class="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-all duration-700 group-hover:scale-105">
+
+            <!-- Play Button Overlay -->
+            <div class="absolute -top-[2%] -right-[2%] -bottom-[2%] -left-[2%] z-20 bg-black">
+              <iframe src="https://fast.wistia.net/embed/iframe/gyk6qx2pwt" allowtransparency="true" frameborder="0" scrolling="no" class="w-full h-full" allowfullscreen="" mozallowfullscreen="" webkitallowfullscreen="" oallowfullscreen="" msallowfullscreen="" width="100%" height="100%"></iframe>
+            </div>
+
+            <!-- Optional: UI Badge -->
+            <div class="absolute bottom-4 left-4 md:bottom-6 md:left-6 backdrop-blur-md text-[10px] md:text-xs px-2.5 py-1 md:px-3 md:py-1.5 rounded-full flex items-center gap-2 border bg-black/60 text-white border-white/10 font-manrope z-30">
+              <div class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full animate-pulse bg-blue-500"></div>
+              Watch breakdown
+            </div>
+          </div>
+
+          <!-- Dual CTA Group -->
+          <div class="animate-fade-up delay-500 flex flex-col sm:flex-row gap-3 md:gap-4 w-full mb-6 gap-x-3 gap-y-3 items-center justify-center">
+            <a href="#book-call" class="sm:w-auto md:py-4 hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 group hover:shadow-blue-500/20 hover:bg-blue-700 sm:py-3.5 sm:px-8 font-medium text-white font-manrope bg-blue-500 w-full rounded-full pt-3 pr-6 pb-3 pl-6 text-sm">
+              Book Your Discovery Call
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="phone" aria-hidden="true" class="lucide lucide-phone w-4 h-4"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path></svg>
+            </a>
+          </div>
+
+          <!-- Context Statement -->
+          <p class="animate-fade-up delay-500 text-[9px] text-gray-400 font-manrope sm:text-[10px] md:text-sm">
+            We qualify every prospect against your criteria before they reach
+            your AEs.
+          </p>
+        </div>
+      </section>
+
+      <!-- 3. Social Proof (Trust Bar) -->
+      <div class="md:py-12 md:mb-20 text-center w-full border-gray-100 border-b mb-16 pt-8 pb-8">
+        <h3 class="md:text-2xl text-lg text-gray-900 font-serif mb-2">
+          Built On Industry-Leading Infrastructure
+        </h3>
+        <p class="text-[10px] md:text-xs uppercase md:mb-10 text-gray-400 tracking-widest font-manrope mb-8">
+          THE STACK BEHIND EVERY COLDCLICK CAMPAIGN
+        </p>
+
+        <div class="marquee-mask relative overflow-hidden">
+          <div class="flex w-max animate-infinite-scroll">
+            <!-- Logos -->
+            <div class="flex items-center gap-10 md:gap-16 pr-10 pl-0 md:px-8">
+              <div class="flex items-center gap-2">
+                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/0a20376b-a412-4fec-b6ba-651e3692f2ee_320w.png" alt="HubSpot" class="md:h-8 md:w-32 w-24 h-6 object-contain rounded-sm">
+              </div>
+              <div class="flex items-center gap-2">
+                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/23c7582c-d1f1-496d-899b-c9203a7e27e0_320w.png" alt="Zoom" class="md:h-8 md:w-32 w-24 h-6 object-contain rounded-sm">
+              </div>
+              <div class="flex items-center gap-2">
+                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/0a51acd6-acbe-44d0-ab5a-24c965b29465_320w.png" alt="Slack" class="md:h-8 md:w-32 w-24 h-6 object-contain rounded-sm">
+              </div>
+              <div class="flex items-center gap-2">
+                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/2315affb-71ba-4f55-a9ac-f9329824c066_320w.png" alt="Cloudflare" class="md:h-8 md:w-32 w-24 h-6 object-contain rounded-sm">
+              </div>
+              <div class="flex items-center gap-2">
+                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/51717ebd-313b-4dfc-b819-2b57136e5d10_320w.png" alt="Instantly" class="md:h-8 md:w-32 w-24 h-6 object-contain rounded-sm">
+              </div>
+              <div class="flex items-center gap-2">
+                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/b7bfce04-4935-45e4-a259-4ef0a1de6f61_320w.png" alt="Supabase" class="md:h-8 md:w-32 w-24 h-6 object-contain rounded-sm">
+              </div>
+              <div class="flex items-center gap-2">
+                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/48f1a651-9cb0-4f4a-a163-e9651cc9d9f9_320w.png" alt="Candidly" class="md:h-8 md:w-32 w-24 h-6 object-contain rounded-sm">
+              </div>
+            </div>
+            <!-- Duplicate -->
+            <div class="flex items-center gap-10 md:gap-16 pr-10 pl-0 md:px-8">
+              <div class="flex items-center gap-2">
+                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/0a20376b-a412-4fec-b6ba-651e3692f2ee_320w.png" alt="HubSpot" class="md:h-8 md:w-32 w-24 h-6 object-contain rounded-sm">
+              </div>
+              <div class="flex items-center gap-2">
+                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/23c7582c-d1f1-496d-899b-c9203a7e27e0_320w.png" alt="Zoom" class="md:h-8 md:w-32 w-24 h-6 object-contain rounded-sm">
+              </div>
+              <div class="flex items-center gap-2">
+                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/0a51acd6-acbe-44d0-ab5a-24c965b29465_320w.png" alt="Slack" class="md:h-8 md:w-32 w-24 h-6 object-contain rounded-sm">
+              </div>
+              <div class="flex items-center gap-2">
+                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/2315affb-71ba-4f55-a9ac-f9329824c066_320w.png" alt="Cloudflare" class="md:h-8 md:w-32 w-24 h-6 object-contain rounded-sm">
+              </div>
+              <div class="flex items-center gap-2">
+                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/51717ebd-313b-4dfc-b819-2b57136e5d10_320w.png" alt="Instantly" class="md:h-8 md:w-32 w-24 h-6 object-contain rounded-sm">
+              </div>
+              <div class="flex items-center gap-2">
+                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/b7bfce04-4935-45e4-a259-4ef0a1de6f61_320w.png" alt="Supabase" class="md:h-8 md:w-32 w-24 h-6 object-contain rounded-sm">
+              </div>
+              <div class="flex items-center gap-2">
+                <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/48f1a651-9cb0-4f4a-a163-e9651cc9d9f9_320w.png" alt="Candidly" class="md:h-8 md:w-32 w-24 h-6 object-contain rounded-sm">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Pain Points Section -->
+      <section class="md:pb-20 max-w-6xl mr-auto ml-auto pb-8">
+        <h2 class="md:mb-16 md:text-5xl text-xl font-medium text-gray-900 tracking-tight font-serif text-center mb-6 pr-4 pl-4">
+          Are You Struggling With...
+        </h2>
+        <div class="grid md:grid-cols-3 gap-3 md:gap-8">
+          <!-- Card 1 -->
+          <div class="md:p-8 md:rounded-3xl hover:shadow-lg transition-all duration-300 bg-gradient-to-br to-white from-red-50 border-red-200 border rounded-2xl pt-4 pr-4 pb-4 pl-4 shadow-sm">
+            <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl flex items-center justify-center mb-3 md:mb-6 bg-red-100 text-red-600">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trending-down" aria-hidden="true" class="lucide lucide-trending-down w-4 h-4 md:w-6 md:h-6"><path d="M16 17h6v-6"></path><path d="m22 17-8.5-8.5-5 5L2 7"></path></svg>
+            </div>
+            <h3 class="leading-tight md:text-xl lg:text-2xl md:mb-3 md:min-h-[7rem] lg:min-h-[6rem] text-base font-semibold text-gray-900 font-manrope mb-1">
+              SDRs and Agencies Paid To Book Meetings, Not Drive Revenue
+            </h3>
+            <p class="leading-snug md:leading-relaxed md:text-base text-sm font-light text-gray-500 font-manrope">
+              You're paying for activity, not outcomes. SDRs cost $98K-$173K.
+              Agencies bill $5K-$15K a month on retainer. Both are paid to fill
+              your calendar with meetings but fail to focus on the metric you're
+              measured on: revenue.
+            </p>
+          </div>
+          <!-- Card 2 -->
+          <div class="md:p-8 md:rounded-3xl hover:shadow-lg transition-all duration-300 bg-gradient-to-br to-white from-red-50 rounded-2xl p-4 shadow-sm border border-red-200">
+            <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl flex items-center justify-center mb-3 md:mb-6 bg-red-100 text-red-600">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="calendar-x-2" class="lucide lucide-calendar-x-2 w-4 h-4 md:w-6 md:h-6" aria-hidden="true" style="color: rgb(220, 38, 38);"><path d="M8 2v4"></path><path d="M16 2v4"></path><path d="M21 13V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8"></path><path d="M3 10h18"></path><path d="m17 22 5-5"></path><path d="m17 17 5 5"></path></svg>
+            </div>
+            <h3 class="leading-tight md:text-xl lg:text-2xl md:mb-3 md:min-h-[7rem] lg:min-h-[6rem] text-base font-semibold text-gray-900 font-manrope mb-1">
+              Outreach Your Prospects Spot As AI-Generated
+            </h3>
+            <p class="leading-snug md:leading-relaxed md:text-base text-sm font-light text-gray-500 font-manrope">
+              Templated sequences and AI-personalized snippets get deleted on
+              sight. 94% of B2B buyers now use LLMs themselves and recognize
+              machine-written text instantly. Your reply rates collapse and your
+              domain reputation takes the hit.
+            </p>
+          </div>
+          <!-- Card 3 -->
+          <div class="md:p-8 md:rounded-3xl hover:shadow-lg transition-all duration-300 bg-gradient-to-br to-white from-red-50 rounded-2xl p-4 shadow-sm border border-red-200">
+            <div class="w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl flex items-center justify-center mb-3 md:mb-6 bg-red-100 text-red-600">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="circle-dollar-sign" class="lucide lucide-circle-dollar-sign w-4 h-4 md:w-6 md:h-6" aria-hidden="true" style="color: rgb(220, 38, 38);"><circle cx="12" cy="12" r="10"></circle><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path><path d="M12 18V6"></path></svg>
+            </div>
+            <h3 class="leading-tight md:text-xl lg:text-2xl md:mb-3 md:min-h-[7rem] lg:min-h-[6rem] text-base font-semibold text-gray-900 font-manrope mb-1">
+              Losing Deals Because Your Pipeline Is Full Of Demo-Sitters, Not
+              Buyers
+            </h3>
+            <p class="leading-snug md:leading-relaxed md:text-base text-sm font-light text-gray-500 font-manrope">
+              84% of B2B reps missed quota last year. Their pipelines were full
+              of prospects willing to attend a demo but not ready to buy. B2B
+              buyers need 9.5 touchpoints on average before they're ready to
+              have a real conversation, and if no one is doing the nurture work
+              before they reach your AE, the meeting happens too early and the
+              deal doesn't close.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Benefits / Why Us -->
+      <section class="md:p-12 lg:p-16 pt-8 pb-8 px-4 md:rounded-[2.5rem] overflow-hidden md:mb-16 bg-white border-gray-200/60 border rounded-[1.5rem] mb-8 relative shadow-sm">
+        <div class="text-center mb-8 md:mb-16 px-2 md:px-4">
+          <h2 class="md:mb-4 md:text-5xl text-2xl font-medium text-gray-900 tracking-tight font-serif mb-2">
+            Why Choose Coldclick
+          </h2>
+          <p class="md:text-base text-sm font-light text-gray-500 font-manrope max-w-2xl mr-auto ml-auto">
+            Built around Revenue-First Outbound, the only outbound system
+            structurally aligned with closed-won revenue.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-3 md:gap-6 mb-8 md:mb-16">
+          <!-- Benefit 1 -->
+          <div class="group md:rounded-3xl md:p-8 overflow-hidden h-full flex flex-col transition-colors hover:border-blue-200 bg-gradient-to-br from-white to-gray-50 border-gray-200 border rounded-2xl p-4 relative">
+            <h3 class="md:text-2xl md:mb-4 leading-tight md:min-h-[7rem] lg:min-h-[6rem] z-10 text-base font-semibold text-gray-900 font-manrope mb-1.5 relative">
+              Paid Only When Your AEs Accept Into Pipeline
+            </h3>
+            <p class="leading-snug md:leading-relaxed z-10 md:text-base md:pr-0 text-sm font-light text-gray-500 font-manrope pr-4 relative">
+              We don't bill on retainer. We don't charge per meeting booked. We
+              only get paid when your AE accepts the call into pipeline as a
+              real opportunity. We focus on the same metric you're measured on,
+              revenue generated, because we know that's the only way the
+              partnership can make sense for you commercially over the long run.
+            </p>
+            <div class="absolute -bottom-3 -right-3 md:relative md:bottom-auto md:right-auto md:mt-auto md:pt-6 self-end transition-colors duration-500 transform group-hover:scale-110 group-hover:text-blue-500 text-blue-100 z-0 opacity-40 md:opacity-100 pointer-events-none md:pointer-events-auto">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="crosshair" aria-hidden="true" class="lucide lucide-crosshair w-16 h-16 md:w-24 md:h-24 stroke-[1px]"><circle cx="12" cy="12" r="10"></circle><line x1="22" x2="18" y1="12" y2="12"></line><line x1="6" x2="2" y1="12" y2="12"></line><line x1="12" x2="12" y1="6" y2="2"></line><line x1="12" x2="12" y1="22" y2="18"></line></svg>
+            </div>
+          </div>
+          <!-- Benefit 2 -->
+          <div class="group md:rounded-3xl md:p-8 overflow-hidden h-full flex flex-col transition-colors bg-gradient-to-br border rounded-2xl p-4 relative from-white to-gray-50 border-gray-200 hover:border-blue-200">
+            <h3 class="md:text-2xl md:mb-4 leading-tight md:min-h-[7rem] lg:min-h-[6rem] z-10 text-base font-semibold text-gray-900 font-manrope mb-1.5 relative">
+              Plain, Human-Written Emails. No AI Personalization.
+            </h3>
+            <p class="leading-snug md:leading-relaxed z-10 md:text-base md:pr-0 text-sm font-light text-gray-500 font-manrope pr-4 relative">
+              No templated sequences. No scraped LinkedIn hooks. No
+              AI-personalized snippets your prospects can spot inside the first
+              five words. We build messaging from interviews with your existing
+              customers and tailored research into your specific market, then we
+              craft the emails in plain, straight-to-the-point English.
+            </p>
+            <div class="absolute -bottom-3 -right-3 md:relative md:bottom-auto md:right-auto md:mt-auto md:pt-6 self-end transition-colors duration-500 transform group-hover:scale-110 group-hover:text-blue-500 text-blue-100 z-0 opacity-40 md:opacity-100 pointer-events-none md:pointer-events-auto">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="monitor" aria-hidden="true" class="lucide lucide-monitor w-16 h-16 md:w-24 md:h-24 stroke-[1px]"><rect width="20" height="14" x="2" y="3" rx="2"></rect><line x1="8" x2="16" y1="21" y2="21"></line><line x1="12" x2="12" y1="17" y2="21"></line></svg>
+            </div>
+          </div>
+          <!-- Benefit 3 -->
+          <div class="group md:rounded-3xl md:p-8 overflow-hidden h-full flex flex-col transition-colors hover:border-blue-200 bg-gradient-to-br from-white to-gray-50 border-gray-200 border rounded-2xl p-4 relative">
+            <h3 class="md:text-2xl md:mb-4 leading-tight md:min-h-[7rem] lg:min-h-[6rem] z-10 text-base font-semibold text-gray-900 font-manrope mb-1.5 relative">
+              We Don't Book Prospects Until They're Ready For Your AE
+            </h3>
+            <p class="leading-snug md:leading-relaxed z-10 md:text-base md:pr-0 text-sm font-light text-gray-500 font-manrope pr-4 relative">
+              We do the nurture work before your AE ever sees them. If a
+              prospect isn't ready to have a real buying conversation, they stay
+              in nurture, with no charge to you, until they are. Your AE only
+              takes meetings with prospects ready to convert.
+            </p>
+            <div class="absolute -bottom-3 -right-3 md:relative md:bottom-auto md:right-auto md:mt-auto md:pt-6 self-end transition-colors duration-500 transform group-hover:scale-110 group-hover:text-blue-500 text-blue-100 z-0 opacity-40 md:opacity-100 pointer-events-none md:pointer-events-auto">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shield-check" aria-hidden="true" class="lucide lucide-shield-check w-16 h-16 md:w-24 md:h-24 stroke-[1px]"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-center">
+          <a href="#book-call" class="sm:w-auto justify-center transition-all duration-300 flex items-center gap-2 hover:bg-blue-700 md:py-4 text-sm font-medium text-white font-manrope bg-blue-500 w-full rounded-full pt-3.5 pr-8 pb-3.5 pl-8">
+            Book a Call
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="phone" aria-hidden="true" class="lucide lucide-phone w-4 h-4"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path></svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- 6. Featured Testimonial -->
+
+      <!-- 7. Transformation / Process -->
+      <section class="md:py-24 sm:px-6 lg:px-8 overflow-hidden w-full pt-12 pr-4 pb-12 pl-4" id="process">
+        <div class="text-center mb-8 md:mb-16">
+          <span class="text-[10px] md:text-xs uppercase block font-semibold text-blue-700 tracking-widest font-manrope mb-3">
+            REVENUE-FIRST OUTBOUND
+          </span>
+          <h2 class="md:text-5xl text-2xl font-medium text-gray-900 font-serif tracking-tight">
+            How We Reduce Your Time-To-Revenue
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 lg:gap-8 max-w-6xl mr-auto ml-auto relative gap-x-8 gap-y-8">
+          <!-- Connecting Line (Desktop) -->
+          <div class="hidden lg:block absolute top-12 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent to-transparent -z-10 via-gray-200"></div>
+
+          <!-- Step 1 -->
+          <div class="flex flex-col group text-center items-center">
+            <div class="w-12 h-12 md:w-24 md:h-24 border rounded-full flex items-center justify-center text-lg md:text-2xl font-serif mb-3 md:mb-6 shadow-sm transition-colors bg-white border-gray-200 text-gray-400 group-hover:border-blue-500 group-hover:text-blue-500 relative z-10">
+              1
+            </div>
+            <h3 class="text-lg md:text-xl lg:text-2xl font-medium text-gray-900 font-manrope mb-2 md:mb-3 tracking-tight md:min-h-[7rem] lg:min-h-[6rem]">
+              Target Your Entire TAM
+            </h3>
+            <p class="leading-relaxed lg:text-base text-sm font-light text-gray-500 font-manrope max-w-[16rem] mr-auto ml-auto pr-2 pl-2">
+              We target your entire TAM, not just the 1-3% actively shopping
+              right now. Outreach is sent across your full market on
+              infrastructure designed for deliverability at scale.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="flex flex-col group text-center items-center">
+            <div class="w-12 h-12 md:w-24 md:h-24 border rounded-full flex items-center justify-center text-lg md:text-2xl font-serif mb-3 md:mb-6 shadow-sm transition-colors bg-white border-gray-200 text-gray-400 group-hover:border-blue-500 group-hover:text-blue-500 relative z-10">
+              2
+            </div>
+            <h3 class="md:text-xl lg:text-2xl md:mb-3 text-lg font-medium text-gray-900 tracking-tight font-manrope mb-2 md:min-h-[7rem] lg:min-h-[6rem]">
+              Qualify Every Prospect Against Your Criteria
+            </h3>
+            <p class="leading-relaxed lg:text-base text-sm font-light text-gray-500 font-manrope max-w-[16rem] mr-auto ml-auto pr-2 pl-2">
+              When a prospect responds, we don't just hand them over to your AE.
+              We work the prospect ourselves with calls, custom Loom videos, and
+              tailor-made value propositions, then qualify them against the
+              criteria we agreed on during onboarding.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="flex flex-col group text-center items-center">
+            <div class="w-12 h-12 md:w-24 md:h-24 border rounded-full flex items-center justify-center text-lg md:text-2xl font-serif mb-3 md:mb-6 shadow-sm transition-colors bg-white border-gray-200 text-gray-400 group-hover:border-blue-500 group-hover:text-blue-500 relative z-10">
+              <span class="relative bottom-[1px] md:bottom-[2px]">3</span>
+            </div>
+            <h3 class="md:text-xl lg:text-2xl md:mb-3 md:min-h-[7rem] lg:min-h-[6rem] text-lg font-medium text-gray-900 tracking-tight font-manrope mb-2">
+              Book Only When They're Ready For Your AE
+            </h3>
+            <p class="leading-relaxed lg:text-base text-sm font-light text-gray-500 font-manrope max-w-[16rem] mr-auto ml-auto pr-2 pl-2">
+              If the prospect is ready to have a real buying conversation, we
+              book the call directly into your AE's calendar. If they're not,
+              they stay in nurture, with no charge to you, until the timing is
+              right.
+            </p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="flex flex-col group text-center items-center">
+            <div class="w-12 h-12 md:w-24 md:h-24 border rounded-full flex items-center justify-center text-lg md:text-2xl font-serif mb-3 md:mb-6 shadow-sm transition-colors bg-white border-gray-200 text-gray-400 group-hover:border-blue-500 group-hover:text-blue-500 relative z-10">
+              <span class="relative bottom-[1px] md:bottom-[2px]">4</span>
+            </div>
+            <h3 class="md:text-xl lg:text-2xl md:mb-3 text-lg font-medium text-gray-900 tracking-tight font-manrope mb-2 md:min-h-[7rem] lg:min-h-[6rem]">
+              Track Through To Revenue &amp; Repeat
+            </h3>
+            <p class="leading-relaxed lg:text-base text-sm font-light text-gray-500 font-manrope max-w-[16rem] mr-auto ml-auto pr-2 pl-2">
+              We don't stop tracking at "meeting booked." We follow every
+              accepted call through pipeline progression, deal stage, and
+              closed-won outcome. The closed-won data feeds back into the next
+              campaign, so the system gets sharper over time.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex justify-center mt-10 md:mt-16">
+          <a href="#book-call" class="sm:w-auto justify-center transition-all duration-300 flex items-center gap-2 hover:shadow-xl hover:shadow-blue-500/20 hover:bg-blue-700 group md:py-4 text-sm font-medium text-white font-manrope bg-blue-500 w-full rounded-full pt-3.5 pr-8 pb-3.5 pl-8 shadow-lg">
+            Book Your Discovery Call
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="phone" aria-hidden="true" class="lucide lucide-phone w-4 h-4"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path></svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- Video Deep Dive -->
+      <section class="mb-16 md:mb-24 px-0 md:px-6">
+        <div class="md:rounded-[2.5rem] md:p-20 overflow-hidden text-center bg-white border-gray-200/60 border rounded-[2rem] pt-10 pr-6 pb-10 pl-6 relative shadow-sm" id="how-it-works">
+          <div class="z-10 relative">
+            <h2 class="md:mb-6 md:text-5xl text-2xl font-medium text-gray-900 tracking-tight font-serif mb-4">
+              Your New Outbound Engine
+            </h2>
+            <p class="md:text-lg md:mb-12 leading-relaxed text-sm font-light text-gray-500 font-manrope max-w-2xl mr-auto mb-8 ml-auto">
+              Built around your offer, your ICP, and your market.
+            </p>
+            <div class="md:rounded-[2rem] md:shadow-2xl overflow-hidden md:mb-12 md:border-4 shadow-gray-200 bg-blue-500 w-full max-w-[62rem] border-white/50 border-2 ring-gray-900/5 ring-1 rounded-xl mr-auto mb-8 ml-auto relative shadow-xl">
+              <iframe src="https://fast.wistia.net/embed/iframe/kty9kms4zy" allowtransparency="true" frameborder="0" scrolling="no" class="w-full aspect-video scale-[1.03] transform" allowfullscreen="" mozallowfullscreen="" webkitallowfullscreen="" oallowfullscreen="" msallowfullscreen="" width="100%" height="100%"></iframe>
+            </div>
+            <div class="flex justify-center">
+              <a href="#book-call" class="sm:w-auto justify-center transition-all duration-300 flex items-center gap-2 hover:shadow-xl hover:shadow-blue-500/20 hover:bg-blue-700 group md:py-4 text-sm font-medium text-white font-manrope bg-blue-500 w-full rounded-full pt-3.5 pr-8 pb-3.5 pl-8 shadow-lg">
+                Book A Call
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="phone" aria-hidden="true" class="lucide lucide-phone w-4 h-4"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. Offer / What's Included -->
+      <section class="md:py-20 -mx-4 md:-mx-6 md:px-6 md:rounded-[3rem] bg-gray-50 rounded-[2.5rem] pt-16 pr-4 pb-16 pl-4">
+        <div class="max-w-7xl mr-auto ml-auto">
+          <div class="text-center mb-12 md:mb-16">
+            <span class="uppercase text-[10px] md:text-xs block font-bold text-blue-700 tracking-widest font-manrope mb-3">
+              OUTBOUND, DONE PROPERLY.
+            </span>
+            <h2 class="sm:text-3xl md:text-5xl sm:whitespace-nowrap text-2xl font-medium text-gray-900 tracking-tight font-serif">
+              What's Included?
+            </h2>
+          </div>
+
+          <div class="overflow-hidden relative">
+            <div class="absolute top-0 right-0 w-[20rem] h-[20rem] md:w-[40rem] md:h-[40rem] bg-gradient-to-b to-transparent rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none from-blue-50/50"></div>
+            <div class="relative z-10 flex flex-col items-center">
+              <div class="grid md:grid-cols-2 gap-y-4 gap-x-20 md:gap-y-6 w-full max-w-4xl mb-12 md:mb-16">
+                <ul class="space-y-4 md:space-y-6">
+                  <li class="flex items-center gap-3 md:gap-4">
+                    <div class="w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center shrink-0 bg-blue-50 text-blue-700">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-3.5 h-3.5 md:w-5 md:h-5"><path d="M20 6 9 17l-5-5"></path></svg>
+                    </div>
+                    <span class="md:text-lg font-medium text-gray-700 font-manrope text-sm">
+                      Onboarding discovery session to define what qualified
+                      means for your business
+                    </span>
+                  </li>
+                  <li class="flex items-center gap-3 md:gap-4">
+                    <div class="w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center shrink-0 bg-blue-50 text-blue-700">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-3.5 h-3.5 md:w-5 md:h-5"><path d="M20 6 9 17l-5-5"></path></svg>
+                    </div>
+                    <span class="md:text-lg font-medium text-gray-700 font-manrope text-sm">
+                      Customer interviews with your existing customers to
+                      extract the highest-converting value proposition
+                    </span>
+                  </li>
+                  <li class="flex items-center gap-3 md:gap-4">
+                    <div class="w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center shrink-0 bg-blue-50 text-blue-700">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-3.5 h-3.5 md:w-5 md:h-5"><path d="M20 6 9 17l-5-5"></path></svg>
+                    </div>
+                    <span class="md:text-lg font-medium text-gray-700 font-manrope text-sm">
+                      Tailored market research into your specific ICP
+                    </span>
+                  </li>
+                  <li class="flex items-center gap-3 md:gap-4">
+                    <div class="w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center shrink-0 bg-blue-50 text-blue-700">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-3.5 h-3.5 md:w-5 md:h-5"><path d="M20 6 9 17l-5-5"></path></svg>
+                    </div>
+                    <span class="md:text-lg font-medium text-gray-700 font-manrope text-sm">
+                      Full TAM list pulled and enriched based on your ICP
+                    </span>
+                  </li>
+                  <li class="flex items-center gap-3 md:gap-4">
+                    <div class="w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center shrink-0 bg-blue-50 text-blue-700">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-3.5 h-3.5 md:w-5 md:h-5"><path d="M20 6 9 17l-5-5"></path></svg>
+                    </div>
+                    <span class="md:text-lg font-medium text-gray-700 font-manrope text-sm">
+                      Lookalike domains purchased and warmed over 14 days
+                    </span>
+                  </li>
+                  <li class="flex items-center gap-3 md:gap-4">
+                    <div class="w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center shrink-0 bg-blue-50 text-blue-700">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-3.5 h-3.5 md:w-5 md:h-5"><path d="M20 6 9 17l-5-5"></path></svg>
+                    </div>
+                    <span class="md:text-lg font-medium text-gray-700 font-manrope text-sm">
+                      Plain, human-written emails. No AI personalization
+                    </span>
+                  </li>
+                  <li class="flex items-center gap-3 md:gap-4">
+                    <div class="w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center shrink-0 bg-blue-50 text-blue-700">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-3.5 h-3.5 md:w-5 md:h-5"><path d="M20 6 9 17l-5-5"></path></svg>
+                    </div>
+                    <span class="md:text-lg font-medium text-gray-700 font-manrope text-sm">
+                      At least 1,000 emails per day at full capacity, totaling
+                      up to 20,000 emails per month
+                    </span>
+                  </li>
+                </ul>
+                <ul class="space-y-4 md:space-y-6">
+                  <li class="flex items-center gap-3 md:gap-4">
+                    <div class="w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center shrink-0 bg-blue-50 text-blue-700">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-3.5 h-3.5 md:w-5 md:h-5"><path d="M20 6 9 17l-5-5"></path></svg>
+                    </div>
+                    <span class="md:text-lg font-medium text-gray-700 font-manrope text-sm">
+                      We call every interested lead on the phone
+                    </span>
+                  </li>
+                  <li class="flex items-center gap-3 md:gap-4">
+                    <div class="w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center shrink-0 bg-blue-50 text-blue-700">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-3.5 h-3.5 md:w-5 md:h-5"><path d="M20 6 9 17l-5-5"></path></svg>
+                    </div>
+                    <span class="md:text-lg font-medium text-gray-700 font-manrope text-sm">
+                      Custom Loom videos recorded for each interested lead
+                    </span>
+                  </li>
+                  <li class="flex items-center gap-3 md:gap-4">
+                    <div class="w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center shrink-0 bg-blue-50 text-blue-700">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-3.5 h-3.5 md:w-5 md:h-5"><path d="M20 6 9 17l-5-5"></path></svg>
+                    </div>
+                    <span class="md:text-lg font-medium text-gray-700 font-manrope text-sm">
+                      Tailor-made value proposition documents for each lead's
+                      specific company
+                    </span>
+                  </li>
+                  <li class="flex items-center gap-3 md:gap-4">
+                    <div class="w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center shrink-0 bg-blue-50 text-blue-700">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-3.5 h-3.5 md:w-5 md:h-5"><path d="M20 6 9 17l-5-5"></path></svg>
+                    </div>
+                    <span class="md:text-lg font-medium text-gray-700 font-manrope text-sm">
+                      Physical mail sent to your highest-priority targets
+                    </span>
+                  </li>
+                  <li class="flex items-center gap-3 md:gap-4">
+                    <div class="w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center shrink-0 bg-blue-50 text-blue-700">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-3.5 h-3.5 md:w-5 md:h-5"><path d="M20 6 9 17l-5-5"></path></svg>
+                    </div>
+                    <span class="md:text-lg font-medium text-gray-700 font-manrope text-sm">
+                      Every prospect qualified against your criteria before
+                      booking with your AEs
+                    </span>
+                  </li>
+                  <li class="flex items-center gap-3 md:gap-4">
+                    <div class="w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center shrink-0 bg-blue-50 text-blue-700">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-3.5 h-3.5 md:w-5 md:h-5"><path d="M20 6 9 17l-5-5"></path></svg>
+                    </div>
+                    <span class="md:text-lg font-medium text-gray-700 font-manrope text-sm">
+                      Long-form nurture sequences populated with case studies
+                      and collateral from your existing content
+                    </span>
+                  </li>
+                  <li class="flex items-center gap-3 md:gap-4">
+                    <div class="w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center shrink-0 bg-blue-50 text-blue-700">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-3.5 h-3.5 md:w-5 md:h-5"><path d="M20 6 9 17l-5-5"></path></svg>
+                    </div>
+                    <span class="md:text-lg font-medium text-gray-700 font-manrope text-sm">
+                      Daily Slack updates, weekly summary reports, and
+                      pipeline-to-revenue tracking
+                    </span>
+                  </li>
+                  <li class="flex items-center gap-3 md:gap-4">
+                    <div class="w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center shrink-0 bg-blue-50 text-blue-700">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-3.5 h-3.5 md:w-5 md:h-5"><path d="M20 6 9 17l-5-5"></path></svg>
+                    </div>
+                    <span class="md:text-lg font-bold text-gray-900 font-manrope border-blue-200 border-b-2 text-sm">
+                      Performance-Based Pricing
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              <div class="flex flex-col items-center w-full">
+                <a href="#book-call" class="transition-all duration-300 flex items-center justify-center gap-3 group shadow-blue-900/10 hover:bg-blue-700 sm:w-auto md:py-4 text-sm font-medium text-white font-manrope bg-blue-500 w-full rounded-full pt-3.5 pr-8 pb-3.5 pl-8 shadow-xl">
+                  Book Your Discovery Call
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="phone" aria-hidden="true" class="lucide lucide-phone w-5 h-5"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9. Full Testimonial Grid -->
+      <section class="md:p-12 lg:p-16 md:rounded-[2.5rem] overflow-hidden md:mb-24 bg-white border-gray-200/60 border rounded-[2rem] mb-16 pt-12 pr-6 pb-12 pl-6 relative shadow-sm">
+        <h2 class="md:mb-6 md:text-5xl text-2xl font-medium text-gray-900 tracking-tight font-serif text-center mb-4">
+          Your 90-Day Campaign
+        </h2>
+
+        <p class="md:text-lg md:mb-12 leading-relaxed font-light text-gray-500 font-manrope text-center max-w-2xl mr-auto mb-8 ml-auto text-sm">
+          Four phases, four outcomes.
+          <span class="block md:inline md:mt-0 mt-1">
+            <span class="md:ml-1">Setup</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-arrow-right w-3 h-3 inline-block align-middle mx-1">
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
+            Ramp
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-arrow-right w-3 h-3 inline-block align-middle mx-1">
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
+            Optimise
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="lucide lucide-arrow-right w-3 h-3 inline-block align-middle mx-1">
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
+            Scale
+          </span>
+        </p>
+
+        <div class="flex w-full max-w-4xl mr-auto ml-auto justify-center">
+          <div class="relative aspect-video w-[96%] rounded-[2rem]">
+            <div class="relative w-full h-full bg-blue-500 rounded-xl md:rounded-[2rem] shadow-xl md:shadow-2xl overflow-hidden border-2 md:border-4 border-white/50 ring-1 ring-gray-900/5 shadow-gray-200">
+              <iframe src="https://fast.wistia.net/embed/iframe/tc88auqilo" allowtransparency="true" frameborder="0" scrolling="no" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[104%] h-[104%] bg-transparent" allowfullscreen="" mozallowfullscreen="" webkitallowfullscreen="" oallowfullscreen="" msallowfullscreen=""></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10. About Me Section -->
+      <section class="md:py-24 grid lg:grid-cols-2 gap-10 md:gap-16 border-gray-100 border-t pt-16 pb-16 gap-x-10 gap-y-10 items-center" id="about">
+        <div class="order-2 lg:order-1">
+          <h2 class="md:mb-8 md:text-5xl text-2xl font-medium text-gray-900 tracking-tight font-serif mb-6">
+            Hi, I'm Jonathan.
+          </h2>
+          <div class="md:space-y-6 md:text-base leading-relaxed text-sm font-light text-gray-500 space-y-4">
+            <p class="md:text-base text-sm font-manrope">
+              I've spent over four years booking meetings for B2B SaaS companies
+              across outbound, inbound, and partnerships. Throughout that time,
+              I've consistently overachieved on quota and brought meaningful
+              revenue to the businesses I've worked with.
+            </p>
+            <p class="md:text-base text-sm font-manrope">
+              I've since learned the cold email infrastructure side to outreach,
+              so I can reach prospects at scale without losing the SDR craft of
+              qualifying them and getting them booked in at the right time. If
+              you're looking to partner with an agency that books meetings your
+              AEs actually want to take, Coldclick was made for that.
+            </p>
+            <p class="md:text-base text-sm font-manrope">
+              My goal is simple. To be the agency B2B founders and revenue
+              leaders call when they want outbound done properly.
+            </p>
+          </div>
+          <a href="#book-call" class="md:mt-8 transition-all hover:border-blue-600 inline-block md:text-base font-semibold text-blue-700 font-manrope border-blue-200 border-b mt-6 pb-0.5 text-sm">
+            Let's Talk!
+          </a>
+        </div>
+        <div class="order-1 lg:order-2 md:h-[500px] overflow-visible md:overflow-hidden bg-transparent md:bg-gray-100 w-full h-64 rounded-[2rem] relative">
+          <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/2020c7b1-a0f8-4fb9-8010-4454b1239cb0_1600w.png" alt="Founder" class="hover:grayscale-0 transition-all duration-700 bg-center grayscale object-cover h-full w-auto aspect-square mx-auto rounded-[2rem] shadow-xl md:shadow-none md:w-full md:aspect-auto md:rounded-none">
+        </div>
+      </section>
+
+      <!-- 11. Final CTA (Lead Magnet) -->
+      <section id="contact" class="py-16 md:py-20 mb-16 md:mb-20 rounded-[2rem] md:rounded-[2.5rem] text-center px-4 md:px-6 relative overflow-hidden bg-blue-500">
+        <div class="bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] via-gray-900 to-gray-900 from-blue-900/40 absolute top-0 right-0 bottom-0 left-0 grayscale backdrop-grayscale transition-all duration-700 [section:hover_&amp;]:grayscale-0 [section:hover_&amp;]:backdrop-grayscale-0"></div>
+
+        <div class="z-10 max-w-2xl mr-auto ml-auto relative">
+          <h2 class="md:mb-6 md:text-5xl text-2xl font-medium text-white tracking-tight font-serif mb-4">
+            Ready For Qualified Sales Calls?
+          </h2>
+          <p class="md:text-lg md:mb-10 text-sm font-light text-gray-400 font-manrope mb-8">
+            We'll walk through your current outbound process, your goals, and
+            whether Coldclick is the right fit. No pressure.
+          </p>
+
+          <div class="flex justify-center max-w-md mx-auto">
+            <a href="/#book-call" class="md:py-4 transition-colors hover:bg-blue-600 shadow-blue-900/50 inline-flex items-center justify-center gap-2 group text-sm font-medium text-white font-manrope bg-blue-500 rounded-full pt-3.5 pr-8 pb-3.5 pl-8 shadow-lg">
+              Get In Contact
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" aria-hidden="true" class="lucide lucide-arrow-right transition-transform group-hover:translate-x-0.5 w-[24px] h-[16px]" data-icon-replaced="true" style="color: rgb(255, 255, 255); width: 24px; height: 16px;"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 12. FAQ Section -->
+      <section class="md:py-10 md:mb-24 md:px-6 max-w-3xl mr-auto mb-16 ml-auto pt-8 pr-2 pb-8 pl-2">
+        <h2 class="md:mb-12 md:text-5xl text-2xl font-medium text-gray-900 tracking-tight font-serif text-center mb-10">
+          FAQs
+        </h2>
+
+        <div class="space-y-4">
+          <!-- FAQ 1 -->
+          <details class="group border rounded-2xl overflow-hidden transition-all duration-300 open:shadow-md bg-white border-gray-200">
+            <summary class="flex md:p-6 cursor-pointer select-none md:text-base text-sm font-medium text-gray-900 font-manrope pt-5 pr-5 pb-5 pl-5 items-center justify-between">
+              What does "qualified" actually mean?
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down w-4 h-4 md:w-5 md:h-5 transition-transform group-open:rotate-180 text-gray-400"><path d="m6 9 6 6 6-6"></path></svg>
+            </summary>
+            <div class="px-5 md:px-6 pb-6 text-sm text-gray-500 leading-relaxed font-light border-t pt-4 border-gray-100 font-manrope">
+              During onboarding, we agree with you on what qualified looks like
+              for your business. It becomes part of our ICP research and our
+              booking process, so we only count meetings that match your
+              criteria.
+            </div>
+          </details>
+
+          <!-- FAQ 2 -->
+          <details class="group border rounded-2xl overflow-hidden transition-all duration-300 open:shadow-md bg-white border-gray-200">
+            <summary class="flex md:p-6 cursor-pointer select-none md:text-base text-sm font-medium text-gray-900 font-manrope pt-5 pr-5 pb-5 pl-5 items-center justify-between">
+              How does the pricing work?
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down md:w-5 md:h-5 transition-transform group-open:rotate-180 w-[16px] h-[16px]" data-icon-replaced="true" style="color: rgb(156, 163, 175); width: 16px; height: 16px;"><path d="m6 9 6 6 6-6"></path></svg>
+            </summary>
+            <div class="md:px-6 leading-relaxed text-sm font-light text-gray-500 font-manrope border-gray-100 border-t pt-4 pr-5 pb-6 pl-5">
+              Pricing is performance-based, so you only pay per qualified call
+              that shows up and is accepted into your AE's pipeline. We'll walk
+              through the exact figures on the discovery call.
+            </div>
+          </details>
+
+          <!-- FAQ 3 -->
+          <details class="group border rounded-2xl overflow-hidden transition-all duration-300 open:shadow-md bg-white border-gray-200">
+            <summary class="flex md:p-6 cursor-pointer select-none md:text-base font-medium text-gray-900 font-manrope pt-5 pr-5 pb-5 pl-5 items-center justify-between text-sm">
+              What's the commitment?
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down md:w-5 md:h-5 transition-transform group-open:rotate-180 w-[16px] h-[16px]" data-icon-replaced="true" style="width: 16px; height: 16px; color: rgb(156, 163, 175);"><path d="m6 9 6 6 6-6"></path></svg>
+            </summary>
+            <div class="px-5 md:px-6 pb-6 text-sm text-gray-500 leading-relaxed font-light border-t pt-4 border-gray-100 font-manrope">
+              We work in 90-day campaigns. The first two weeks are setup
+              (infrastructure, messaging, research). The remaining time is live
+              execution where we book qualified calls and refine the messaging
+              based on real market feedback. After 90 days, you can run another
+              campaign with sharper messaging and stronger results, move to a
+              longer engagement, or take everything we've built and run it
+              yourself.
+            </div>
+          </details>
+
+          <!-- FAQ 4 -->
+          <details class="group border rounded-2xl overflow-hidden transition-all duration-300 open:shadow-md bg-white border-gray-200">
+            <summary class="flex md:p-6 cursor-pointer select-none md:text-base font-medium text-gray-900 font-manrope pt-5 pr-5 pb-5 pl-5 items-center justify-between text-sm">
+              How quickly will we see qualified calls?
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down w-4 h-4 md:w-5 md:h-5 transition-transform group-open:rotate-180 text-gray-400"><path d="m6 9 6 6 6-6"></path></svg>
+            </summary>
+            <div class="px-5 md:px-6 pb-6 text-sm text-gray-500 leading-relaxed font-light border-t pt-4 border-gray-100 font-manrope">
+              After the two-week setup, bookings usually start within the first
+              month. The early period is where we learn what's resonating in
+              your market, refine the messaging, and identify the strongest
+              channels. By the second half of the campaign, the system has real
+              data behind it and the qualified calls compound. If you continue
+              beyond 90 days, that compounding is what makes the next campaign
+              outperform the first.
+            </div>
+          </details>
+
+          <!-- FAQ 5 -->
+          <details class="group border rounded-2xl overflow-hidden transition-all duration-300 open:shadow-md bg-white border-gray-200">
+            <summary class="flex md:p-6 cursor-pointer select-none md:text-base text-sm font-medium text-gray-900 font-manrope pt-5 pr-5 pb-5 pl-5 items-center justify-between">
+              How is this different from hiring an SDR team?
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down md:w-5 md:h-5 transition-transform group-open:rotate-180 w-[16px] h-[16px]" data-icon-replaced="true" style="width: 16px; height: 16px; color: rgb(156, 163, 175);"><path d="m6 9 6 6 6-6"></path></svg>
+            </summary>
+            <div class="md:px-6 leading-relaxed text-sm font-light text-gray-500 font-manrope border-gray-100 border-t pt-4 pr-5 pb-6 pl-5">
+              A fully loaded SDR costs $98K-$173K per year (salary, tools,
+              overhead, commissions) before they book a single meeting. With
+              Coldclick, you pay per qualified call that shows up and is
+              accepted into your AE's pipeline. The deeper difference is
+              structural: SDRs are paid to book meetings. We're paid on the same
+              metric you're measured on, revenue.
+            </div>
+          </details>
+
+          <!-- FAQ 6 -->
+          <details class="group border rounded-2xl overflow-hidden transition-all duration-300 open:shadow-md bg-white border-gray-200">
+            <summary class="flex md:p-6 cursor-pointer select-none md:text-base font-medium text-gray-900 font-manrope px-5 py-5 items-center justify-between text-sm">
+              Will this work for our industry?
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down w-4 h-4 md:w-5 md:h-5 transition-transform group-open:rotate-180 text-gray-400"><path d="m6 9 6 6 6-6"></path></svg>
+            </summary>
+            <div class="px-5 md:px-6 pb-6 text-sm text-gray-500 leading-relaxed font-light border-t pt-4 border-gray-100 font-manrope">
+              We focus on B2B companies selling to other businesses in the US
+              market. If you have product-market fit and can articulate the
+              value of what you sell to a senior buyer, the system works. We're
+              happy to confirm fit for your specific ICP on the discovery call.
+            </div>
+          </details>
+        </div>
+
+        <p class="text-gray-400 font-manrope text-center mt-8 text-sm md:text-xs">
+          Don't see what you're looking for?
+          <a href="/#book-call" class="underline transition-all decoration-blue-200 hover:decoration-blue-600 text-blue-700">
+            Get in touch
+          </a>
+          .
+        </p>
+      </section>
+      <!-- 13. Book a Call Section -->
+      <section class="md:py-24 md:px-6 max-w-7xl mr-auto ml-auto pt-16 pr-4 pb-16 pl-4" id="book-call">
+        <div class="text-center mb-10 md:mb-16">
+          <h2 class="md:text-5xl text-2xl font-normal text-gray-900 tracking-tight font-serif mb-6">
+            Book a Call
+          </h2>
+          <p class="md:text-lg font-extralight text-gray-500 font-manrope max-w-2xl mx-auto text-sm">
+            Book a no-commitment discovery call to discuss how we can help you
+            grow.
+          </p>
+        </div>
+        <div class="w-full rounded-[2rem] border shadow-sm overflow-hidden bg-white border-gray-200">
+          <!-- Calendly inline widget begin -->
+          <div class="calendly-inline-widget w-full" data-url="https://calendly.com/jonathan-coldclick/disco?hide_gdpr_banner=1&amp;primary_color=e11d48" style="position: relative;min-width: 100%; height: 1000px; width: 100%;" data-processed="true">
+            <div class="calendly-spinner">
+              <div class="calendly-bounce1"></div>
+              <div class="calendly-bounce2"></div>
+              <div class="calendly-bounce3"></div>
+            </div>
+            <iframe src="https://calendly.com/jonathan-coldclick/disco?embed_domain=&amp;embed_type=Inline&amp;hide_gdpr_banner=1&amp;primary_color=e11d48" width="100%" height="100%" frameborder="0" title="Select a Date &amp; Time - Calendly" class=""></iframe>
+          </div>
+          <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async=""></script>
+          <!-- Calendly inline widget end -->
+        </div>
+      </section>
+    </main>
+
+    <!-- 13. Footer -->
+    <footer class="md:pt-16 md:pb-10 md:px-6 bg-white border-gray-200 border-t pt-12 pr-4 pb-8 pl-4">
+      <div class="flex flex-col md:flex-row md:items-start gap-8 md:gap-10 max-w-7xl mr-auto ml-auto gap-x-8 gap-y-8 items-center justify-between">
+        <!-- Logo -->
+        <div class="text-center md:text-left">
+          <a href="#" class="text-3xl font-normal italic text-gray-900 tracking-tight font-serif inline-block transition-opacity hover:opacity-80">
+            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/e718aed0-12bc-4a23-a7fd-dd4555eb6655_320w.png" alt="Logo Placeholder" class="w-[150px] h-9 object-cover hover:grayscale-0 hover:filter-none">
+          </a>
+          <p class="md:mx-0 md:text-xs text-sm font-light text-gray-400 font-manrope max-w-xs mt-3 mr-auto ml-auto">
+            Outbound, Done Properly.
+          </p>
+        </div>
+
+        <!-- Links -->
+        <div class="flex flex-col gap-3 md:text-right text-center gap-x-3 gap-y-3">
+          <a href="#home" class="transition-colors hover:text-blue-600 font-medium text-gray-600 font-manrope text-sm md:text-sm">
+            Services
+          </a>
+          <a href="#how-it-works" class="transition-colors hover:text-blue-600 md:text-sm text-sm font-medium text-gray-600 font-manrope">
+            How It Works
+          </a>
+          <a href="#about" class="transition-colors hover:text-blue-600 font-medium text-gray-600 font-manrope text-sm md:text-sm">
+            About
+          </a>
+          <a href="#book-call" class="transition-colors hover:text-blue-600 font-medium text-gray-600 font-manrope text-sm md:text-sm">
+            Contact
+          </a>
+        </div>
+      </div>
+
+      <div class="max-w-7xl mx-auto mt-12 md:mt-16 pt-8 border-t text-center text-[10px] md:text-xs border-gray-100 text-gray-400 font-manrope">
+        <p class="font-manrope">© 2026 Coldclick. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script class="">
+      lucide.createIcons();
+    </script>
+  
+</body></html>
