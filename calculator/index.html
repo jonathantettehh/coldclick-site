@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Coldclick ROI Calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+  html, body { margin: 0; padding: 0; background: #FBFBFD; }
+  * { box-sizing: border-box; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useMemo } = React;
+
+// Coldclick ROI Calculator
+// 90-day (3-cohort) model. One month of sending is one cohort.
+// Closed deals floored to whole numbers for the return. <1 whole deal -> show time-to-first-deal.
+
+const PACKAGES = {
+  Bronze:  { label: "Bronze",  min: 1000, max: 2000, fee: 750,  base: "#B87333", deep: "#8C551F", soft: "#F6ECE2" },
+  Silver:  { label: "Silver",  min: 2001, max: 3000, fee: 1500, base: "#9AA3AD", deep: "#6B7480", soft: "#EEF0F2" },
+  Gold:    { label: "Gold",    min: 3001, max: 4000, fee: 2250, base: "#D4A017", deep: "#A87C0C", soft: "#F8F1DC" },
+  Diamond: { label: "Diamond", min: 4001, max: 5000, fee: 3000, base: "#3FB6C9", deep: "#2B8294", soft: "#E2F4F7" },
+};
+
+const SENDING_DAYS = 20;
+const WINDOW_MONTHS = 3;
+const NAVY = "#0F1729";
+const BLUE = "#2C6BFF";
+
+const fmtMoney = (n) => {
+  if (!isFinite(n) || isNaN(n)) return "$0";
+  return "$" + Math.round(n).toLocaleString("en-US");
+};
+const fmtNum = (n, dp = 1) => {
+  if (!isFinite(n) || isNaN(n)) return "0";
+  return n.toLocaleString("en-US", { minimumFractionDigits: dp, maximumFractionDigits: dp });
+};
+const fmtInt = (n) => Math.round(n).toLocaleString("en-US");
+const roundPerDay = (perDay) => Math.floor(perDay / 50) * 50;
+
+function Field({ label, help, children }) {
+  return (
+    <div style={{ marginBottom: 22 }}>
+      <div style={{ fontWeight: 700, color: NAVY, fontSize: 15, marginBottom: 6 }}>{label}</div>
+      {children}
+      {help && <div style={{ fontSize: 12.5, color: "#6B7280", marginTop: 6, lineHeight: 1.45 }}>{help}</div>}
+    </div>
+  );
+}
+
+function Slider({ value, min, max, step, onChange, accent, suffix, targetLo, targetHi }) {
+  return (
+    <div>
+      <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
+        <span style={{ fontSize: 22, fontWeight: 800, color: accent }}>{value}{suffix}</span>
+        {targetLo != null && (
+          <span style={{ fontSize: 12, color: "#9CA3AF" }}>target {targetLo}–{targetHi}{suffix}</span>
+        )}
+      </div>
+      <input type="range" min={min} max={max} step={step} value={value}
+        onChange={(e) => onChange(parseFloat(e.target.value))}
+        style={{ width: "100%", accentColor: accent, marginTop: 6 }} />
+    </div>
+  );
+}
+
+function Row({ label, value, strong, accent }) {
+  return (
+    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "9px 0", borderBottom: "1px solid #F0F1F4" }}>
+      <span style={{ fontSize: 14, color: strong ? NAVY : "#4B5563", fontWeight: strong ? 700 : 500 }}>{label}</span>
+      <span style={{ fontSize: strong ? 18 : 15, color: strong ? accent : NAVY, fontWeight: strong ? 800 : 600 }}>{value}</span>
+    </div>
+  );
+}
+
+function ColdclickROICalculator() {
+  const [pkg, setPkg] = useState("Bronze");
+  const [perDay, setPerDay] = useState(1500);
+
+  const [totalReply, setTotalReply] = useState(1.5);
+  const [posReply, setPosReply] = useState(7.5);
+  const [callRate, setCallRate] = useState(50);
+  const [mandateRate, setMandateRate] = useState(25);
+  const [perCall, setPerCall] = useState(250);
+
+  const [closeRate, setCloseRate] = useState(20);
+  const [successFee, setSuccessFee] = useState(100000);
+  const [timeToClose, setTimeToClose] = useState(9);
+
+  const p = PACKAGES[pkg];
+
+  const selectPkg = (k) => {
+    setPkg(k);
+    const np = PACKAGES[k];
+    setPerDay((prev) => Math.min(np.max, Math.max(np.min, prev)));
+  };
+
+  const m = useMemo(() => {
+    const cleanPerDay = roundPerDay(perDay);
+    const emailsPerMonth = cleanPerDay * SENDING_DAYS;
+    const replies = emailsPerMonth * (totalReply / 100);
+    const positives = replies * (posReply / 100);
+    const calls = positives * (callRate / 100);
+    const mandates = calls * (mandateRate / 100);
+    const dealsPerMonth = mandates * (closeRate / 100);
+
+    const callFeesPerMonth = calls * perCall;
+    const spendPerMonth = p.fee + callFeesPerMonth;
+
+    const spend90 = spendPerMonth * WINDOW_MONTHS;
+    const rawDeals90 = dealsPerMonth * WINDOW_MONTHS;
+    const wholeDeals90 = Math.floor(rawDeals90);
+    const return90 = wholeDeals90 * successFee;
+    const multiple90 = spend90 > 0 ? return90 / spend90 : 0;
+    const monthsToOneDeal = dealsPerMonth > 0 ? 1 / dealsPerMonth : Infinity;
+
+    return { cleanPerDay, emailsPerMonth, replies, positives, calls, mandates, dealsPerMonth,
+      callFeesPerMonth, spendPerMonth, spend90, rawDeals90, wholeDeals90, return90, multiple90, monthsToOneDeal };
+  }, [p, perDay, totalReply, posReply, callRate, mandateRate, perCall, closeRate, successFee, timeToClose]);
+
+  const hasWholeDeal = m.wholeDeals90 >= 1;
+
+  return (
+    <div style={{ fontFamily: "Manrope, system-ui, -apple-system, sans-serif", background: "#FBFBFD", padding: "28px 20px", color: NAVY, maxWidth: 920, margin: "0 auto" }}>
+      <div style={{ marginBottom: 24 }}>
+        <h1 style={{ fontSize: 26, fontWeight: 800, margin: 0, letterSpacing: -0.5 }}>Coldclick ROI Calculator</h1>
+        <p style={{ fontSize: 14.5, color: "#6B7280", margin: "6px 0 0" }}>Your return over 90 days from outbound-sourced deals.</p>
+      </div>
+
+      {/* Package selector */}
+      <div style={{ marginBottom: 18 }}>
+        <div style={{ fontWeight: 700, fontSize: 14, marginBottom: 10 }}>Choose your package</div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 10 }}>
+          {Object.keys(PACKAGES).map((k) => {
+            const active = pkg === k;
+            const pk = PACKAGES[k];
+            return (
+              <button key={k} onClick={() => selectPkg(k)}
+                style={{
+                  border: active ? `2px solid ${pk.deep}` : `1.5px solid ${pk.base}`,
+                  background: active ? pk.deep : pk.soft,
+                  color: active ? "#fff" : pk.deep,
+                  borderRadius: 12, padding: "12px 8px", cursor: "pointer", textAlign: "left",
+                  transition: "all .15s", boxShadow: active ? `0 4px 14px ${pk.base}55` : "none", fontFamily: "inherit",
+                }}>
+                <div style={{ fontWeight: 800, fontSize: 15 }}>{pk.label}</div>
+                <div style={{ fontSize: 11.5, opacity: 0.85, marginTop: 2 }}>{fmtInt(pk.min)}–{fmtInt(pk.max)}/day</div>
+                <div style={{ fontSize: 13, fontWeight: 700, marginTop: 6 }}>${pk.fee}/mo</div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Master emails/day slider */}
+      <div style={{ background: "#fff", border: "1px solid #E5E7EB", borderLeft: `4px solid ${p.deep}`, borderRadius: 14, padding: "18px 22px", marginBottom: 26 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: 12 }}>
+          <div>
+            <div style={{ fontSize: 12, fontWeight: 800, color: p.deep, letterSpacing: 1, textTransform: "uppercase" }}>{p.label} — Emails Per Day</div>
+            <div style={{ fontSize: 34, fontWeight: 800, color: NAVY, marginTop: 2 }}>{fmtInt(m.cleanPerDay)}</div>
+          </div>
+          <div style={{ textAlign: "right" }}>
+            <div style={{ fontSize: 12.5, color: "#9CA3AF", fontWeight: 600 }}>Emails per month</div>
+            <div style={{ fontSize: 22, fontWeight: 800, color: p.deep }}>{fmtInt(m.emailsPerMonth)}</div>
+            <div style={{ fontSize: 11, color: "#9CA3AF" }}>{SENDING_DAYS} sending days</div>
+          </div>
+        </div>
+        <input type="range" min={p.min} max={p.max} step={50} value={perDay}
+          onChange={(e) => setPerDay(parseFloat(e.target.value))}
+          style={{ width: "100%", accentColor: p.deep, marginTop: 14 }} />
+        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11.5, color: "#9CA3AF", marginTop: 2 }}>
+          <span>{fmtInt(p.min)}/day</span>
+          <span>{fmtInt(p.max)}/day</span>
+        </div>
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+        {/* PANEL A */}
+        <div style={{ background: "#fff", border: "1px solid #E5E7EB", borderTop: `3px solid ${NAVY}`, borderRadius: 14, padding: 22 }}>
+          <div style={{ fontSize: 12, fontWeight: 800, color: NAVY, letterSpacing: 1, textTransform: "uppercase", marginBottom: 4 }}>What Coldclick Delivers</div>
+          <div style={{ fontSize: 12.5, color: "#9CA3AF", marginBottom: 18 }}>What we control and charge for, each month.</div>
+
+          <Field label="Reply Rate" help="Of all emails sent, the percentage that come back as a reply. Out-of-office and auto-replies are not counted.">
+            <Slider value={totalReply} min={0} max={5} step={0.1} onChange={setTotalReply} accent={NAVY} suffix="%" targetLo={1} targetHi={2} />
+          </Field>
+          <Field label="Positive Reply Rate" help="Of those replies, the percentage that are actually interested. 5–10% is a strong result on cold M&A outbound.">
+            <Slider value={posReply} min={0} max={25} step={0.5} onChange={setPosReply} accent={NAVY} suffix="%" targetLo={5} targetHi={10} />
+          </Field>
+          <Field label="Positive Reply → Intro Call" help="Of the interested replies, the percentage we turn into a booked intro call delivered into your calendar.">
+            <Slider value={callRate} min={0} max={100} step={1} onChange={setCallRate} accent={NAVY} suffix="%" targetLo={40} targetHi={60} />
+          </Field>
+          <Field label="Intro Call → Mandate" help="Of the intro calls we deliver, the percentage you convert into a signed mandate.">
+            <Slider value={mandateRate} min={0} max={100} step={1} onChange={setMandateRate} accent={NAVY} suffix="%" targetLo={20} targetHi={40} />
+          </Field>
+          <Field label="Cost Per Intro Call" help="What Coldclick charges per accepted introductory call.">
+            <div style={{ display: "flex", alignItems: "center", border: "1px solid #E5E7EB", borderRadius: 10, padding: "8px 12px" }}>
+              <span style={{ color: "#9CA3AF", marginRight: 6 }}>$</span>
+              <input type="number" value={perCall}
+                onChange={(e) => setPerCall(Math.max(0, parseFloat(e.target.value) || 0))}
+                style={{ border: "none", outline: "none", fontSize: 18, fontWeight: 700, color: NAVY, width: "100%", fontFamily: "inherit" }} />
+            </div>
+          </Field>
+
+          <div style={{ marginTop: 8, paddingTop: 6 }}>
+            <Row label="Emails / Month" value={fmtNum(m.emailsPerMonth, 0)} />
+            <Row label="Replies / Month" value={fmtNum(m.replies, 0)} />
+            <Row label="Positive Replies / Month" value={fmtNum(m.positives, 1)} />
+            <Row label="Intro Calls / Month" value={fmtNum(m.calls, 1)} />
+            <Row label="Monthly Tech Fee" value={fmtMoney(p.fee)} />
+            <Row label="Monthly Call Fees" value={fmtMoney(m.callFeesPerMonth)} />
+            <Row label="Spend / Month" value={fmtMoney(m.spendPerMonth)} strong accent={NAVY} />
+          </div>
+        </div>
+
+        {/* PANEL B */}
+        <div style={{ background: "#fff", border: "1px solid #E5E7EB", borderTop: `3px solid ${BLUE}`, borderRadius: 14, padding: 22 }}>
+          <div style={{ fontSize: 12, fontWeight: 800, color: BLUE, letterSpacing: 1, textTransform: "uppercase", marginBottom: 4 }}>Your Return</div>
+          <div style={{ fontSize: 12.5, color: "#9CA3AF", marginBottom: 18 }}>Your business, your numbers, your money.</div>
+
+          <Field label="Mandate → Closed Deal" help="Of the mandates you sign, the percentage that close. Your number — set it to your real estimate.">
+            <Slider value={closeRate} min={0} max={100} step={1} onChange={setCloseRate} accent={BLUE} suffix="%" />
+          </Field>
+          <Field label="Average Success Fee per Closed Deal" help="Your average success fee on a closed deal. Coldclick takes none of this.">
+            <div style={{ display: "flex", alignItems: "center", border: "1px solid #E5E7EB", borderRadius: 10, padding: "8px 12px" }}>
+              <span style={{ color: "#9CA3AF", marginRight: 6 }}>$</span>
+              <input type="number" value={successFee}
+                onChange={(e) => setSuccessFee(Math.max(0, parseFloat(e.target.value) || 0))}
+                style={{ border: "none", outline: "none", fontSize: 18, fontWeight: 700, color: NAVY, width: "100%", fontFamily: "inherit" }} />
+            </div>
+          </Field>
+          <Field label="Average Time to Close" help="Average time from intro call to a closed deal. This shows when the return lands — it does not change the size of the return.">
+            <Slider value={timeToClose} min={1} max={24} step={1} onChange={setTimeToClose} accent={BLUE} suffix=" mo" />
+          </Field>
+
+          <div style={{ marginTop: 8, paddingTop: 6 }}>
+            <Row label="Mandates / Month" value={fmtNum(m.mandates, 1)} />
+            <Row label="Closed Deals (90 days)" value={fmtNum(m.rawDeals90, 1)} />
+            <Row label="Whole Deals Counted" value={fmtNum(m.wholeDeals90, 0)} strong accent={BLUE} />
+          </div>
+          <div style={{ fontSize: 11.5, color: "#9CA3AF", marginTop: 14, lineHeight: 1.5 }}>
+            Returns are counted on whole closed deals only. Fractions of a deal are not counted until they close.
+          </div>
+        </div>
+      </div>
+
+      {/* HEADLINE — 90 day */}
+      <div style={{ marginTop: 24, background: NAVY, borderRadius: 16, padding: "26px 28px", color: "#fff" }}>
+        <div style={{ fontSize: 12, fontWeight: 800, letterSpacing: 1.5, textTransform: "uppercase", color: "#7FA8FF", marginBottom: 18 }}>Over 90 Days</div>
+
+        {hasWholeDeal ? (
+          <React.Fragment>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 20, alignItems: "center" }}>
+              <div>
+                <div style={{ fontSize: 12.5, opacity: 0.7, fontWeight: 600, textTransform: "uppercase", letterSpacing: 0.5 }}>You Invest</div>
+                <div style={{ fontSize: 30, fontWeight: 800, marginTop: 4 }}>{fmtMoney(m.spend90)}</div>
+                <div style={{ fontSize: 12, opacity: 0.6, marginTop: 2 }}>{fmtMoney(m.spendPerMonth)}/mo × 3</div>
+              </div>
+              <div>
+                <div style={{ fontSize: 12.5, opacity: 0.7, fontWeight: 600, textTransform: "uppercase", letterSpacing: 0.5 }}>You Earn</div>
+                <div style={{ fontSize: 30, fontWeight: 800, marginTop: 4, color: "#7FA8FF" }}>{fmtMoney(m.return90)}</div>
+                <div style={{ fontSize: 12, opacity: 0.6, marginTop: 2 }}>{m.wholeDeals90} deal{m.wholeDeals90 === 1 ? "" : "s"} × {fmtMoney(successFee)}</div>
+              </div>
+              <div>
+                <div style={{ fontSize: 12.5, opacity: 0.7, fontWeight: 600, textTransform: "uppercase", letterSpacing: 0.5 }}>Return Multiple</div>
+                <div style={{ fontSize: 30, fontWeight: 800, marginTop: 4, color: BLUE }}>{fmtNum(m.multiple90, 1)}x</div>
+              </div>
+            </div>
+            <div style={{ fontSize: 13.5, opacity: 0.85, marginTop: 18, lineHeight: 1.5, borderTop: "1px solid rgba(255,255,255,0.12)", paddingTop: 16 }}>
+              Over 90 days of outbound you invest <strong style={{ color: "#fff" }}>{fmtMoney(m.spend90)}</strong> and close <strong style={{ color: "#fff" }}>{m.wholeDeals90}</strong> deal{m.wholeDeals90 === 1 ? "" : "s"}, returning <strong style={{ color: "#fff" }}>{fmtMoney(m.return90)}</strong> in success fees. Deals close on average around month <strong style={{ color: "#fff" }}>{timeToClose}</strong>.
+            </div>
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, alignItems: "center" }}>
+              <div>
+                <div style={{ fontSize: 12.5, opacity: 0.7, fontWeight: 600, textTransform: "uppercase", letterSpacing: 0.5 }}>You Invest (90 days)</div>
+                <div style={{ fontSize: 30, fontWeight: 800, marginTop: 4 }}>{fmtMoney(m.spend90)}</div>
+                <div style={{ fontSize: 12, opacity: 0.6, marginTop: 2 }}>{fmtMoney(m.spendPerMonth)}/mo × 3</div>
+              </div>
+              <div>
+                <div style={{ fontSize: 12.5, opacity: 0.7, fontWeight: 600, textTransform: "uppercase", letterSpacing: 0.5 }}>Deals Closed</div>
+                <div style={{ fontSize: 30, fontWeight: 800, marginTop: 4, color: "#7FA8FF" }}>Less than 1</div>
+              </div>
+            </div>
+            <div style={{ fontSize: 13.5, opacity: 0.9, marginTop: 18, lineHeight: 1.55, borderTop: "1px solid rgba(255,255,255,0.12)", paddingTop: 16 }}>
+              {isFinite(m.monthsToOneDeal) ? (
+                <React.Fragment>
+                  At these numbers, it takes roughly <strong style={{ color: "#fff" }}>{fmtNum(m.monthsToOneDeal, 1)} months</strong> of sending to generate one whole deal, which then closes around <strong style={{ color: "#fff" }}>{fmtNum(m.monthsToOneDeal + timeToClose, 1)} months</strong> in. Raise the volume, the close rate, or the success fee to bring that forward.
+                </React.Fragment>
+              ) : (
+                <React.Fragment>At these numbers no deals are produced. Increase volume or your conversion rates to model a return.</React.Fragment>
+              )}
+            </div>
+          </React.Fragment>
+        )}
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<ColdclickROICalculator />);
+</script>
+</body>
+</html>
