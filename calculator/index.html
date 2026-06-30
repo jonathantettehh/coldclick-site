@@ -15,6 +15,11 @@
 <style>
   html, body { margin: 0; padding: 0; background: #FBFBFD; }
   * { box-sizing: border-box; }
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+  input[type=number] { -moz-appearance: textfield; }
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 </style>
 </head>
 <body>
@@ -158,6 +163,38 @@ function ColdclickROICalculator() {
         <p style={{ fontSize: 14.5, color: "#6B7280", margin: "6px 0 0" }}>Your return over 90 days from outbound-sourced deals.</p>
       </div>
 
+      {/* How Our Pricing Works */}
+      <div style={{ marginBottom: 26, background: "#fff", border: "1px solid #E5E7EB", borderRadius: 14, padding: "22px 24px" }}>
+        <div style={{ fontSize: 18, fontWeight: 800, color: NAVY, marginBottom: 14 }}>How Our Pricing Works</div>
+
+        <div style={{ display: "flex", gap: 14, marginBottom: 16, alignItems: "flex-start" }}>
+          <div style={{ flexShrink: 0, width: 26, height: 26, borderRadius: 999, background: BLUE, color: "#fff", fontWeight: 800, fontSize: 14, display: "flex", alignItems: "center", justifyContent: "center" }}>1</div>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 15, color: NAVY, lineHeight: 1.55 }}>
+              We charge{" "}
+              <span style={{ display: "inline-flex", alignItems: "center", border: "1px solid #E5E7EB", borderRadius: 8, padding: "2px 8px", margin: "0 2px", verticalAlign: "middle" }}>
+                <span style={{ color: "#9CA3AF", marginRight: 3 }}>$</span>
+                <input type="number" value={perCall}
+                  onChange={(e) => setPerCall(Math.max(0, parseFloat(e.target.value) || 0))}
+                  style={{ border: "none", outline: "none", fontSize: 16, fontWeight: 800, color: BLUE, width: 56, fontFamily: "inherit", MozAppearance: "textfield" }} />
+              </span>{" "}
+              per qualified call. You only pay this when we deliver an introductory call that meets your criteria.
+            </div>
+          </div>
+        </div>
+
+        <div style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
+          <div style={{ flexShrink: 0, width: 26, height: 26, borderRadius: 999, background: NAVY, color: "#fff", fontWeight: 800, fontSize: 14, display: "flex", alignItems: "center", justifyContent: "center" }}>2</div>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: 15, color: NAVY, lineHeight: 1.55 }}>
+              A monthly tech fee covers the infrastructure. Cold email runs on domains and inboxes that have to be bought, set up,
+              and kept healthy. The tech fee covers that. The more emails you want to send per day, the more domains you need,
+              which the packages below reflect. Pick the package that matches the volume you want.
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Package selector */}
       <div style={{ marginBottom: 18 }}>
         <div style={{ fontWeight: 700, fontSize: 14, marginBottom: 10 }}>Choose your package</div>
@@ -226,7 +263,7 @@ function ColdclickROICalculator() {
                 <div style={{ width: pct + "%", height: "100%", background: band.color, transition: "width .15s, background .15s" }} />
               </div>
               <div style={{ fontSize: 12, color: "#6B7280", marginTop: 12, lineHeight: 1.5, background: "#F7F8FA", border: "1px solid #EEF0F2", borderRadius: 10, padding: "10px 12px" }}>
-                Running closer to 100% sends the most now but burns domains faster, which means replacing them sooner. Holding more
+                Running closer to 100% allows you to send more emails but burns domains faster, which means replacing them sooner. Holding more
                 domains in reserve and sending at lower utilization protects deliverability and keeps the channel running long term.
                 The right point is usually a balance, not the maximum.
               </div>
@@ -241,7 +278,7 @@ function ColdclickROICalculator() {
           <div style={{ fontSize: 12, fontWeight: 800, color: NAVY, letterSpacing: 1, textTransform: "uppercase", marginBottom: 4 }}>What Coldclick Delivers</div>
           <div style={{ fontSize: 12.5, color: "#9CA3AF", marginBottom: 18 }}>What we control and charge for, each month.</div>
 
-          <Field label="Reply Rate" help="Of all emails sent, the percentage that come back as a reply. Out-of-office and auto-replies are not counted.">
+          <Field label="Reply Rate" help="Of all emails sent, the percentage that are replied to. Out-of-office and auto-replies are not counted.">
             <Slider value={totalReply} min={0} max={5} step={0.1} onChange={setTotalReply} accent={NAVY} suffix="%" targetLo={1} targetHi={2} />
           </Field>
           <Field label="Positive Reply Rate" help="Of those replies, the percentage that are actually interested. 5–10% is a strong result on cold M&A outbound.">
