@@ -110,12 +110,15 @@ function ColdclickROICalculator() {
   const m = useMemo(() => {
     const cleanPerDay = roundPerDay(perDay);
     const emailsPerMonth = cleanPerDay * SENDING_DAYS;
-    const replies = emailsPerMonth * (totalReply / 100);
-    const positives = replies * (posReply / 100);
-    const calls = positives * (callRate / 100);
-    const mandates = calls * (mandateRate / 100);
-    const dealsPerMonth = mandates * (closeRate / 100);
+    // Floor at every stage and feed the floored value forward, so all rows reconcile
+    // and we never show or charge for a fraction of a unit.
+    const replies = Math.floor(emailsPerMonth * (totalReply / 100));
+    const positives = Math.floor(replies * (posReply / 100));
+    const calls = Math.floor(positives * (callRate / 100));
+    const mandates = Math.floor(calls * (mandateRate / 100));
+    const dealsPerMonth = mandates * (closeRate / 100); // kept fractional; floored over the window below
 
+    // Tech fee is fixed by package. Call fees are only ever a whole multiple of cost per call.
     const callFeesPerMonth = calls * perCall;
     const spendPerMonth = p.fee + callFeesPerMonth;
 
@@ -216,8 +219,8 @@ function ColdclickROICalculator() {
           <div style={{ marginTop: 8, paddingTop: 6 }}>
             <Row label="Emails / Month" value={fmtNum(m.emailsPerMonth, 0)} />
             <Row label="Replies / Month" value={fmtNum(m.replies, 0)} />
-            <Row label="Positive Replies / Month" value={fmtNum(m.positives, 1)} />
-            <Row label="Intro Calls / Month" value={fmtNum(m.calls, 1)} />
+            <Row label="Positive Replies / Month" value={fmtNum(m.positives, 0)} />
+            <Row label="Intro Calls / Month" value={fmtNum(m.calls, 0)} />
             <Row label="Monthly Tech Fee" value={fmtMoney(p.fee)} />
             <Row label="Monthly Call Fees" value={fmtMoney(m.callFeesPerMonth)} />
             <Row label="Spend / Month" value={fmtMoney(m.spendPerMonth)} strong accent={NAVY} />
@@ -245,9 +248,8 @@ function ColdclickROICalculator() {
           </Field>
 
           <div style={{ marginTop: 8, paddingTop: 6 }}>
-            <Row label="Mandates / Month" value={fmtNum(m.mandates, 1)} />
-            <Row label="Closed Deals (90 days)" value={fmtNum(m.rawDeals90, 1)} />
-            <Row label="Whole Deals Counted" value={fmtNum(m.wholeDeals90, 0)} strong accent={BLUE} />
+            <Row label="Mandates / Month" value={fmtNum(m.mandates, 0)} />
+            <Row label="Deals Closed (90 days)" value={fmtNum(m.wholeDeals90, 0)} strong accent={BLUE} />
           </div>
           <div style={{ fontSize: 11.5, color: "#9CA3AF", marginTop: 14, lineHeight: 1.5 }}>
             Returns are counted on whole closed deals only. Fractions of a deal are not counted until they close.
