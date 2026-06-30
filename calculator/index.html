@@ -28,16 +28,27 @@ const { useState, useMemo } = React;
 // Closed deals floored to whole numbers for the return. <1 whole deal -> show time-to-first-deal.
 
 const PACKAGES = {
-  Bronze:  { label: "Bronze",  min: 1000, max: 2000, fee: 750,  base: "#B87333", deep: "#8C551F", soft: "#F6ECE2" },
-  Silver:  { label: "Silver",  min: 2001, max: 3000, fee: 1500, base: "#9AA3AD", deep: "#6B7480", soft: "#EEF0F2" },
-  Gold:    { label: "Gold",    min: 3001, max: 4000, fee: 2250, base: "#D4A017", deep: "#A87C0C", soft: "#F8F1DC" },
-  Diamond: { label: "Diamond", min: 4001, max: 5000, fee: 3000, base: "#3FB6C9", deep: "#2B8294", soft: "#E2F4F7" },
+  Bronze:  { label: "Bronze",  min: 1000, max: 2000, fee: 750,  domains: 50,  base: "#B87333", deep: "#8C551F", soft: "#F6ECE2" },
+  Silver:  { label: "Silver",  min: 2000, max: 4000, fee: 1500, domains: 100, base: "#9AA3AD", deep: "#6B7480", soft: "#EEF0F2" },
+  Gold:    { label: "Gold",    min: 3000, max: 6000, fee: 2250, domains: 150, base: "#D4A017", deep: "#A87C0C", soft: "#F8F1DC" },
+  Diamond: { label: "Diamond", min: 4000, max: 8000, fee: 3000, domains: 200, base: "#3FB6C9", deep: "#2B8294", soft: "#E2F4F7" },
 };
 
 const SENDING_DAYS = 20;
 const WINDOW_MONTHS = 3;
 const NAVY = "#0F1729";
 const BLUE = "#2C6BFF";
+
+// Max daily capacity if every domain is active: domains x 2 inboxes x 20 emails.
+const maxCapacity = (pkg) => pkg.domains * 2 * 20;
+
+// Utilization band by how hard the owned domains are being pushed.
+const utilBand = (util) => {
+  if (util < 50) return { label: "Sustainable", color: "#1F9D55" };
+  if (util <= 75) return { label: "Balanced", color: "#2C6BFF" };
+  if (util < 90) return { label: "Aggressive", color: "#D97706" };
+  return { label: "Maxed — domains burn faster", color: "#DC2626" };
+};
 
 const fmtMoney = (n) => {
   if (!isFinite(n) || isNaN(n)) return "$0";
@@ -129,8 +140,13 @@ function ColdclickROICalculator() {
     const multiple90 = spend90 > 0 ? return90 / spend90 : 0;
     const monthsToOneDeal = dealsPerMonth > 0 ? 1 / dealsPerMonth : Infinity;
 
+    const cap = maxCapacity(p);
+    const utilization = cap > 0 ? (cleanPerDay / cap) * 100 : 0;
+    const activeDomains = Math.ceil(cleanPerDay / 40); // 2 inboxes x 20 emails per domain
+
     return { cleanPerDay, emailsPerMonth, replies, positives, calls, mandates, dealsPerMonth,
-      callFeesPerMonth, spendPerMonth, spend90, rawDeals90, wholeDeals90, return90, multiple90, monthsToOneDeal };
+      callFeesPerMonth, spendPerMonth, spend90, rawDeals90, wholeDeals90, return90, multiple90, monthsToOneDeal,
+      cap, utilization, activeDomains };
   }, [p, perDay, totalReply, posReply, callRate, mandateRate, perCall, closeRate, successFee, timeToClose]);
 
   const hasWholeDeal = m.wholeDeals90 >= 1;
@@ -159,7 +175,8 @@ function ColdclickROICalculator() {
                   transition: "all .15s", boxShadow: active ? `0 4px 14px ${pk.base}55` : "none", fontFamily: "inherit",
                 }}>
                 <div style={{ fontWeight: 800, fontSize: 15 }}>{pk.label}</div>
-                <div style={{ fontSize: 11.5, opacity: 0.85, marginTop: 2 }}>{fmtInt(pk.min)}–{fmtInt(pk.max)}/day</div>
+                <div style={{ fontSize: 11.5, opacity: 0.85, marginTop: 2 }}>{pk.domains} domains</div>
+                <div style={{ fontSize: 11.5, opacity: 0.85, marginTop: 1 }}>{fmtInt(pk.min)}–{fmtInt(pk.max)} emails per day</div>
                 <div style={{ fontSize: 13, fontWeight: 700, marginTop: 6 }}>${pk.fee}/mo</div>
               </button>
             );
@@ -187,6 +204,35 @@ function ColdclickROICalculator() {
           <span>{fmtInt(p.min)}/day</span>
           <span>{fmtInt(p.max)}/day</span>
         </div>
+
+        {/* Domain utilization */}
+        {(() => {
+          const band = utilBand(m.utilization);
+          const pct = Math.min(100, m.utilization);
+          return (
+            <div style={{ marginTop: 18, borderTop: "1px solid #F0F1F4", paddingTop: 16 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 8 }}>
+                <span style={{ fontSize: 13, fontWeight: 700, color: NAVY }}>
+                  Domain Utilization
+                  <span style={{ fontWeight: 500, color: "#9CA3AF", marginLeft: 8 }}>
+                    {m.activeDomains} of {p.domains} domains active
+                  </span>
+                </span>
+                <span style={{ fontSize: 14, fontWeight: 800, color: band.color }}>
+                  {fmtNum(m.utilization, 0)}% · {band.label}
+                </span>
+              </div>
+              <div style={{ height: 8, background: "#EEF0F2", borderRadius: 6, overflow: "hidden" }}>
+                <div style={{ width: pct + "%", height: "100%", background: band.color, transition: "width .15s, background .15s" }} />
+              </div>
+              <div style={{ fontSize: 12, color: "#6B7280", marginTop: 12, lineHeight: 1.5, background: "#F7F8FA", border: "1px solid #EEF0F2", borderRadius: 10, padding: "10px 12px" }}>
+                Running closer to 100% sends the most now but burns domains faster, which means replacing them sooner. Holding more
+                domains in reserve and sending at lower utilization protects deliverability and keeps the channel running long term.
+                The right point is usually a balance, not the maximum.
+              </div>
+            </div>
+          );
+        })()}
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
