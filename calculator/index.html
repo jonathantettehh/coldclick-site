@@ -43,10 +43,10 @@ const { useState, useMemo } = React;
 // Closed deals floored to whole numbers for the return. <1 whole deal -> show time-to-first-deal.
 
 const PACKAGES = {
-  Bronze:  { label: "Bronze",  min: 1000, max: 2000, fee: 750,  domains: 50,  base: "#B87333", deep: "#8C551F", soft: "#F6ECE2" },
-  Silver:  { label: "Silver",  min: 2000, max: 4000, fee: 1500, domains: 100, base: "#9AA3AD", deep: "#6B7480", soft: "#EEF0F2" },
-  Gold:    { label: "Gold",    min: 3000, max: 6000, fee: 2250, domains: 150, base: "#D4A017", deep: "#A87C0C", soft: "#F8F1DC" },
-  Diamond: { label: "Diamond", min: 4000, max: 8000, fee: 3000, domains: 200, base: "#3FB6C9", deep: "#2B8294", soft: "#E2F4F7" },
+  Bronze:  { label: "Bronze",  min: 1000, max: 2000, fee: 750,  domains: 50,  guarantee: 5,  base: "#B87333", deep: "#8C551F", soft: "#F6ECE2" },
+  Silver:  { label: "Silver",  min: 2000, max: 4000, fee: 1500, domains: 100, guarantee: 10, base: "#9AA3AD", deep: "#6B7480", soft: "#EEF0F2" },
+  Gold:    { label: "Gold",    min: 3000, max: 6000, fee: 2250, domains: 150, guarantee: 15, base: "#D4A017", deep: "#A87C0C", soft: "#F8F1DC" },
+  Diamond: { label: "Diamond", min: 4000, max: 8000, fee: 3000, domains: 200, guarantee: 20, base: "#3FB6C9", deep: "#2B8294", soft: "#E2F4F7" },
 };
 
 const SENDING_DAYS = 20;
@@ -112,25 +112,26 @@ function Row({ label, value, strong, accent }) {
 }
 
 function ColdclickROICalculator() {
-  const [pkg, setPkg] = useState("Bronze");
-  const [perDay, setPerDay] = useState(1500);
+  const [pkg, setPkg] = useState("Silver");
+  const [perDay, setPerDay] = useState(3000);
 
-  const [totalReply, setTotalReply] = useState(1.5);
-  const [posReply, setPosReply] = useState(7.5);
+  const [totalReply, setTotalReply] = useState(1);
+  const [posReply, setPosReply] = useState(5);
   const [callRate, setCallRate] = useState(50);
-  const [mandateRate, setMandateRate] = useState(25);
-  const [perCall, setPerCall] = useState(250);
+  const [mandateRate, setMandateRate] = useState(20);
+  const [perCall, setPerCall] = useState(300);
 
   const [closeRate, setCloseRate] = useState(20);
-  const [successFee, setSuccessFee] = useState(100000);
-  const [timeToClose, setTimeToClose] = useState(9);
+  const [successFee, setSuccessFee] = useState(200000);
+  const [timeToClose, setTimeToClose] = useState(12);
 
   const p = PACKAGES[pkg];
 
+  // Snap to 75% utilization on every package change: 75% of max capacity (domains x 40).
   const selectPkg = (k) => {
     setPkg(k);
     const np = PACKAGES[k];
-    setPerDay((prev) => Math.min(np.max, Math.max(np.min, prev)));
+    setPerDay(Math.round((np.domains * 40 * 0.75) / 50) * 50);
   };
 
   const m = useMemo(() => {
@@ -225,6 +226,7 @@ function ColdclickROICalculator() {
                 <div style={{ fontSize: 11.5, opacity: 0.85, marginTop: 2 }}>{pk.domains} domains</div>
                 <div style={{ fontSize: 11.5, opacity: 0.85, marginTop: 1 }}>{fmtInt(pk.min)}–{fmtInt(pk.max)} emails per day</div>
                 <div style={{ fontSize: 13, fontWeight: 700, marginTop: 6 }}>${pk.fee}/mo</div>
+                <div style={{ fontSize: 12.5, fontWeight: 800, marginTop: 6 }}>{pk.guarantee} guaranteed calls / month</div>
               </button>
             );
           })}
@@ -295,9 +297,9 @@ function ColdclickROICalculator() {
             <Slider value={posReply} min={0} max={25} step={0.5} onChange={setPosReply} accent={NAVY} suffix="%" targetLo={5} targetHi={10} />
           </Field>
           <Field label="Positive Reply → Intro Call" help="Of the interested replies, the percentage we turn into a booked intro call delivered into your calendar.">
-            <Slider value={callRate} min={0} max={100} step={1} onChange={setCallRate} accent={NAVY} suffix="%" targetLo={40} targetHi={60} />
+            <Slider value={callRate} min={0} max={100} step={1} onChange={setCallRate} accent={NAVY} suffix="%" targetLo={50} targetHi={75} />
           </Field>
-          <Field label="Intro Call → Mandate" help="Of the intro calls we deliver, the percentage you convert into a signed mandate.">
+          <Field label="Intro Call → Mandate" help="Of the intro calls we deliver, the percentage you go on to win as a mandate.">
             <Slider value={mandateRate} min={0} max={100} step={1} onChange={setMandateRate} accent={NAVY} suffix="%" targetLo={20} targetHi={40} />
           </Field>
           <Field label="Cost Per Intro Call" help="What Coldclick charges per accepted introductory call.">
@@ -325,7 +327,7 @@ function ColdclickROICalculator() {
           <div style={{ fontSize: 12, fontWeight: 800, color: BLUE, letterSpacing: 1, textTransform: "uppercase", marginBottom: 4 }}>Your Return</div>
           <div style={{ fontSize: 12.5, color: "#9CA3AF", marginBottom: 18 }}>Your business, your numbers, your money.</div>
 
-          <Field label="Mandate → Closed Deal" help="Of the mandates you sign, the percentage that close. Your number — set it to your real estimate.">
+          <Field label="Mandate → Closed Deal" help="Of the mandates you win, the percentage that go on to close. Your number — set it to your real estimate.">
             <Slider value={closeRate} min={0} max={100} step={1} onChange={setCloseRate} accent={BLUE} suffix="%" />
           </Field>
           <Field label="Average Success Fee per Closed Deal" help="Your average success fee on a closed deal. Coldclick takes none of this.">
@@ -341,11 +343,11 @@ function ColdclickROICalculator() {
           </Field>
 
           <div style={{ marginTop: 8, paddingTop: 6 }}>
-            <Row label="Mandates / Month" value={fmtNum(m.mandates, 0)} />
-            <Row label="Deals Closed (90 days)" value={fmtNum(m.wholeDeals90, 0)} strong accent={BLUE} />
+            <Row label="Mandates Won / Month" value={fmtNum(m.mandates, 0)} />
+            <Row label={`Deals Generated (close within ~${timeToClose} mo)`} value={fmtNum(m.wholeDeals90, 0)} strong accent={BLUE} />
           </div>
           <div style={{ fontSize: 11.5, color: "#9CA3AF", marginTop: 14, lineHeight: 1.5 }}>
-            Returns are counted on whole closed deals only. Fractions of a deal are not counted until they close.
+            These are the mandates and deals 90 days of outbound generates. They close over the following months, not immediately. Only whole deals are counted.
           </div>
         </div>
       </div>
@@ -373,7 +375,7 @@ function ColdclickROICalculator() {
               </div>
             </div>
             <div style={{ fontSize: 13.5, opacity: 0.85, marginTop: 18, lineHeight: 1.5, borderTop: "1px solid rgba(255,255,255,0.12)", paddingTop: 16 }}>
-              Over 90 days of outbound you invest <strong style={{ color: "#fff" }}>{fmtMoney(m.spend90)}</strong> and close <strong style={{ color: "#fff" }}>{m.wholeDeals90}</strong> deal{m.wholeDeals90 === 1 ? "" : "s"}, returning <strong style={{ color: "#fff" }}>{fmtMoney(m.return90)}</strong> in success fees. Deals close on average around month <strong style={{ color: "#fff" }}>{timeToClose}</strong>.
+              Over 90 days of outbound you invest <strong style={{ color: "#fff" }}>{fmtMoney(m.spend90)}</strong> and generate <strong style={{ color: "#fff" }}>{m.wholeDeals90}</strong> deal{m.wholeDeals90 === 1 ? "" : "s"} that go on to close for <strong style={{ color: "#fff" }}>{fmtMoney(m.return90)}</strong> in success fees, on average around month <strong style={{ color: "#fff" }}>{timeToClose}</strong>.
             </div>
           </React.Fragment>
         ) : (
