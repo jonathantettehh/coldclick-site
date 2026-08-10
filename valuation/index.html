@@ -132,7 +132,7 @@
         <div class="relative" id="profitMoneyWrap"><span id="profitPrefix" class="absolute left-4 top-1/2 -translate-y-1/2 text-lg font-semibold text-gray-500 pointer-events-none">$</span>
           <input id="profitValue" type="text" inputmode="numeric" autocomplete="off" placeholder="1,000,000" class="w-full text-lg text-gray-900 bg-gray-50 border-[1.5px] border-gray-200 rounded-xl pl-9 pr-4 py-4 focus:outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100 transition"></div>
       </div>
-      <p class="err text-sm text-red-500 mt-3 hidden">Please choose a measure and enter a figure.</p>
+      <p id="profitErr" class="err text-sm text-red-500 mt-3 hidden">Please choose a measure and enter a figure.</p>
       <div class="flex items-center justify-between mt-7"><button data-back class="btn-ghost">Back</button><button data-next="4" class="btn-primary">Continue</button></div>
     </div></section>
 
@@ -397,6 +397,7 @@ function num(v){const n=parseFloat((v||"").replace(/[^0-9.]/g,""));return isNaN(
 function commafy(v){const d=(v||"").replace(/[^0-9]/g,"");return d?Number(d).toLocaleString("en-US"):"";}
 function titleCase(str){return (str||"").toLowerCase().replace(/\b([a-z])/g,(m,c)=>c.toUpperCase());}
 function showErr(sec,on){const e=sec.querySelector(".err");if(e)e.classList.toggle("hidden",!on);}
+function setProfitErr(msg){const e=document.getElementById("profitErr");if(e)e.textContent=msg;}
 
 (function(){const w=$("#progressWrap");for(let i=0;i<TOTAL_Q;i++){const s=document.createElement("div");s.className="seg";w.appendChild(s);}})();
 function paintProgress(){
@@ -475,7 +476,16 @@ function validate(step){
     case 1: return !!S.company;
     case 2: return !!S.industryKey;
     case 3: return S.revenue!=null && S.revenue>0;
-    case 4: if(!S.profitType) return false; if(S.profitType==="margin") return S.marginPct!=null && S.marginPct>0; return S.profitValue!=null && S.profitValue>0;
+    case 4:
+      if(!S.profitType){ setProfitErr("Please choose a measure and enter a figure."); return false; }
+      if(S.profitType==="margin"){
+        if(S.marginPct==null || S.marginPct<=0){ setProfitErr("Please choose a measure and enter a figure."); return false; }
+        if(S.marginPct>1){ setProfitErr("Margin can't be more than 100%."); return false; }
+        return true;
+      }
+      if(S.profitValue==null || S.profitValue<=0){ setProfitErr("Please choose a measure and enter a figure."); return false; }
+      if(S.revenue!=null && S.profitValue>S.revenue){ setProfitErr("Profit can't be more than your revenue. Please check the figure."); return false; }
+      return true;
     case 5: return S.growth!=null;
     case 6: return S.recur!=null;
     case 7: return S.owner!=null;
