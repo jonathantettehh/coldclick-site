@@ -168,7 +168,7 @@ display: none;
   </a>
 
   <!-- Right: Single CTA -->
-  <a href="/advisors.html" class="md:px-5 md:py-2.5 transition-all duration-300 flex items-center gap-2 group hover:shadow-lg shrink-0 hover:shadow-blue-500/20 hover:bg-blue-700 font-medium text-white font-manrope bg-blue-500 rounded-full pt-2 pr-4 pb-2 pl-4 shadow-md text-sm md:text-base">
+  <a href="/advisors" class="md:px-5 md:py-2.5 transition-all duration-300 flex items-center gap-2 group hover:shadow-lg shrink-0 hover:shadow-blue-500/20 hover:bg-blue-700 font-medium text-white font-manrope bg-blue-500 rounded-full pt-2 pr-4 pb-2 pl-4 shadow-md text-sm md:text-base">
     I'm an M&amp;A Advisor
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" aria-hidden="true" class="lucide lucide-arrow-right w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 hidden sm:block"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
   </a>
@@ -218,10 +218,16 @@ display: none;
       </div>
 
       <!-- CTA -->
-      <div class="animate-fade-up delay-500 flex flex-col sm:flex-row gap-3 md:gap-4 w-full mb-6 gap-x-3 gap-y-3 items-center justify-center">
-        <a href="#book-call" class="w-auto md:py-5 hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 group hover:shadow-blue-500/20 hover:bg-blue-700 sm:py-4 sm:px-10 font-medium text-white font-manrope bg-blue-500 rounded-full pt-3 pr-8 pb-3 pl-8 text-sm md:text-base">
+      <div class="animate-fade-up delay-500 flex flex-col sm:flex-row gap-3 md:gap-4 w-full mb-6 gap-x-3 gap-y-3 items-stretch sm:items-center justify-center">
+        <a href="#book-call" class="w-full sm:w-auto md:py-5 hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 group hover:shadow-blue-500/20 hover:bg-blue-700 sm:py-4 sm:px-10 font-medium text-white font-manrope bg-blue-500 rounded-full py-3 px-6 text-sm md:text-base">
           Find an Advisor
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="arrow-right" aria-hidden="true" class="lucide lucide-arrow-right w-4 h-4 md:w-5 md:h-5 transition-transform group-hover:translate-x-0.5"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+        </a>
+        <!-- vertical divider (hidden when buttons stack on mobile) -->
+        <span class="hidden sm:block w-px self-stretch bg-gray-200 my-1" aria-hidden="true"></span>
+        <a href="/valuation" class="w-full sm:w-auto md:py-5 hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 group hover:shadow-blue-500/20 hover:border-blue-300 sm:py-4 sm:px-10 font-medium text-blue-600 font-manrope bg-white border border-gray-200 rounded-full py-3 px-6 text-sm md:text-base shadow-sm whitespace-nowrap">
+          Use our free valuation calculator
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-4 h-4 md:w-5 md:h-5 transition-transform group-hover:translate-x-0.5 shrink-0"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
         </a>
       </div>
 
@@ -403,6 +409,13 @@ display: none;
           <span class="font-semibold text-gray-900">We charge you nothing.</span>
           No fee for the introduction, and no fee on any transaction that follows.
         </p>
+        <!-- CTA to booking -->
+        <div class="mt-8 flex justify-center">
+          <a href="#book-call" class="w-auto md:py-5 hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 group hover:shadow-blue-500/20 hover:bg-blue-700 sm:py-4 sm:px-10 font-medium text-white font-manrope bg-blue-500 rounded-full pt-3 pr-8 pb-3 pl-8 text-sm md:text-base">
+            Book a call
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="w-4 h-4 md:w-5 md:h-5 transition-transform group-hover:translate-x-0.5"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+          </a>
+        </div>
       </div>
     </div>
   </section>
