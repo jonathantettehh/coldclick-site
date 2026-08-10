@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What's your business worth? | Coldclick</title>
+<link rel="icon" type="image/png" href="/favicon-light.png" media="(prefers-color-scheme: light)">
+<link rel="icon" type="image/png" href="/favicon-dark.png" media="(prefers-color-scheme: dark)">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* TWO FONTS ONLY: Instrument Serif for titles, Manrope for everything else. */
+  body { font-family:'Manrope',sans-serif; background:#FAFAFA; }
+  .font-serif { font-family:'Instrument Serif',serif; }
+  input, button, select, textarea { font-family:'Manrope',sans-serif; }
+  .glass { background:rgba(255,255,255,.7); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); }
+  .step{display:none}
+  .step.on{display:block;animation:rise .45s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .locked-text{filter:blur(5px);user-select:none;pointer-events:none}
+  .calc-track{height:4px;background:#e6e9f0;border-radius:99px;overflow:hidden}
+  .calc-fill{height:100%;width:0;background:#3b82f6;border-radius:99px;transition:width .2s linear}
+  ::selection{background:#dbeafe;color:#1e3a8a}
+  /* v1-style progress bar: gradient active segment */
+  .seg{height:4px;border-radius:99px;flex:1;background:#e6e9f0;transition:background .35s}
+  .seg.done{background:#3b82f6}
+  .seg.active{background:linear-gradient(90deg,#3b82f6,#dbeafe)}
+  .btn-primary{font-weight:600;font-size:16px;color:#fff;background:#3b82f6;border-radius:9999px;padding:13px 28px;box-shadow:0 8px 20px rgba(59,130,246,.28);transition:background .2s,transform .05s}
+  .btn-primary:hover{background:#1d4ed8}
+  .btn-primary:active{transform:translateY(1px)}
+  .btn-ghost{font-weight:600;font-size:16px;color:#6b7280;padding:13px 6px;background:none;transition:color .2s}
+  .btn-ghost:hover{color:#111827}
+  summary::-webkit-details-marker{display:none}
+  /* Inside the wide card, keep form content in a readable centered column */
+  .q-inner{max-width:52rem;margin-left:auto;margin-right:auto}
+  /* form inputs and choice lists sit in a slightly tighter column for readability */
+  .form-col{max-width:40rem;margin-left:auto;margin-right:auto}
+</style>
+</head>
+<body class="antialiased text-gray-600 min-h-screen flex flex-col">
+
+<header class="w-full flex justify-center pt-4 px-4 md:pt-6 md:px-6">
+  <nav class="glass flex gap-4 md:gap-10 w-full max-w-5xl border border-gray-200/60 rounded-full pt-2 pr-2 pb-2 pl-5 shadow-[0_2px_10px_-2px_rgba(0,0,0,0.05)] items-center justify-between">
+    <a href="/" class="group flex items-center gap-2 shrink-0">
+      <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/d759efc7-b63b-446f-aa1b-10118eb5a56c_320w.png" alt="Coldclick" class="md:h-9 w-auto h-7 object-cover rounded-sm">
+    </a>
+    <a href="/" class="md:px-5 md:py-2.5 transition-all duration-300 flex items-center gap-2 group hover:shadow-lg shrink-0 hover:shadow-blue-500/20 hover:bg-blue-700 font-medium text-white bg-blue-500 rounded-full pt-2 pr-4 pb-2 pl-4 shadow-md text-sm md:text-base">
+      Back to site
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 hidden sm:block"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+    </a>
+  </nav>
+</header>
+
+<main class="flex-1 w-full max-w-7xl mx-auto px-4 md:px-6 pt-8 md:pt-14 pb-16 flex flex-col">
+  <div id="progressWrap" class="flex gap-1.5 mb-8 max-w-5xl w-full mx-auto"></div>
+  <div class="bg-white border border-gray-200/60 rounded-[2rem] md:rounded-[2.5rem] shadow-[0_1px_2px_rgba(0,0,0,0.02)] p-7 md:p-14 lg:p-20">
+
+    <!-- STEP 0: LANDING / INTRO -->
+    <section class="step on" data-step="0"><div class="q-inner">
+      <div class="text-center">
+        <div class="text-[11px] md:text-xs font-bold tracking-widest uppercase text-blue-600 mb-5">Business Valuation Calculator</div>
+        <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-gray-900 mb-5 max-w-3xl mx-auto">Find out what your business could sell for</h1>
+        <p class="text-base md:text-lg text-gray-500 mb-10 max-w-xl mx-auto leading-relaxed">A quick estimate, tailored to your business and today's market.</p>
+      </div>
+      <div class="max-w-xs mx-auto flex flex-col gap-3.5 mb-10">
+        <div class="flex items-center gap-3">
+          <span class="shrink-0 w-9 h-9 rounded-xl bg-blue-50 grid place-items-center text-blue-600">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </span>
+          <span class="text-[15px] font-bold text-gray-900">Takes roughly two minutes</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="shrink-0 w-9 h-9 rounded-xl bg-blue-50 grid place-items-center text-blue-600">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </span>
+          <span class="text-[15px] font-bold text-gray-900">No financials to upload</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="shrink-0 w-9 h-9 rounded-xl bg-blue-50 grid place-items-center text-blue-600">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </span>
+          <span class="text-[15px] font-bold text-gray-900">Free to use, with no obligation</span>
+        </div>
+      </div>
+      <div class="text-center">
+        <button data-goto="1" class="btn-primary text-[17px] px-10 py-4">Get a free valuation</button>
+      </div>
+    </div></section>
+
+    <!-- STEP 1: BUSINESS NAME -->
+    <section class="step" data-step="1"><div class="q-inner">
+      <div class="text-[11px] font-bold tracking-widest uppercase text-blue-600 mb-4">Step 1 of 8</div>
+      <h1 class="font-serif text-3xl md:text-[2.6rem] leading-[1.08] text-gray-900 mb-7">What's your business called?</h1>
+      <input id="bizName" type="text" autocomplete="off" placeholder="e.g. Acme Plumbing" class="w-full text-lg text-gray-900 bg-gray-50 border-[1.5px] border-gray-200 rounded-xl px-4 py-4 focus:outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100 transition">
+      <p class="err text-sm text-red-500 mt-2 hidden">Please enter your business name.</p>
+      <div class="flex justify-end mt-7"><button data-next="1" class="btn-primary">Continue</button></div>
+    </div></section>
+
+    <!-- STEP 2: WHAT THEY DO -->
+    <section class="step" data-step="2"><div class="q-inner">
+      <div class="text-[11px] font-bold tracking-widest uppercase text-blue-600 mb-4">Step 2 of 8</div>
+      <h1 id="q2head" class="font-serif text-3xl md:text-[2.6rem] leading-[1.08] text-gray-900 mb-3">What does your business do?</h1>
+      <p class="text-[15px] text-gray-500 mb-6">For example: we do <span class="font-bold text-gray-600">accounting</span>, or we are a <span class="font-bold text-gray-600">dental practice</span>.</p>
+      <input id="bizDesc" type="text" autocomplete="off" placeholder="Type here..." class="w-full text-lg text-gray-900 bg-gray-50 border-[1.5px] border-gray-200 rounded-xl px-4 py-4 focus:outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100 transition">
+      <div id="suggestions" class="mt-3 flex flex-col gap-2"></div>
+      <details id="browse" class="mt-4"><summary class="text-sm font-bold text-gray-500 hover:text-gray-900 cursor-pointer list-none">Or browse the full list</summary><div id="catGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-4"></div></details>
+      <p class="err text-sm text-red-500 mt-3 hidden">Please choose or describe what your business does.</p>
+      <div class="flex items-center justify-between mt-7"><button data-back class="btn-ghost">Back</button><button data-next="2" class="btn-primary">Continue</button></div>
+    </div></section>
+
+    <!-- STEP 3: REVENUE -->
+    <section class="step" data-step="3"><div class="q-inner">
+      <div class="text-[11px] font-bold tracking-widest uppercase text-blue-600 mb-4">Step 3 of 8</div>
+      <h1 class="font-serif text-3xl md:text-[2.6rem] leading-[1.08] text-gray-900 mb-3">What's your yearly revenue, roughly?</h1>
+      <p class="text-[15px] text-gray-500 mb-6">An approximate figure is fine.</p>
+      <div class="relative"><span class="absolute left-4 top-1/2 -translate-y-1/2 text-lg font-semibold text-gray-500 pointer-events-none">$</span>
+        <input id="revenue" type="text" inputmode="numeric" autocomplete="off" placeholder="5,000,000" class="w-full text-lg text-gray-900 bg-gray-50 border-[1.5px] border-gray-200 rounded-xl pl-9 pr-4 py-4 focus:outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100 transition"></div>
+      <p class="text-[13px] text-gray-400 mt-2.5">Total sales in a normal year, before costs.</p>
+      <p class="err text-sm text-red-500 mt-2 hidden">Please enter a rough revenue figure.</p>
+      <div class="flex items-center justify-between mt-7"><button data-back class="btn-ghost">Back</button><button data-next="3" class="btn-primary">Continue</button></div>
+    </div></section>
+
+    <!-- STEP 4: PROFIT -->
+    <section class="step" data-step="4"><div class="q-inner">
+      <div class="text-[11px] font-bold tracking-widest uppercase text-blue-600 mb-4">Step 4 of 8</div>
+      <h1 class="font-serif text-3xl md:text-[2.6rem] leading-[1.08] text-gray-900 mb-3">What's your yearly profit, roughly?</h1>
+      <p class="text-[15px] text-gray-500 mb-6">Pick whichever measure you know best.</p>
+      <div id="profitTypes" class="flex flex-col gap-2 mb-4"></div>
+      <div id="profitEntry" class="hidden">
+        <div class="relative" id="profitMoneyWrap"><span id="profitPrefix" class="absolute left-4 top-1/2 -translate-y-1/2 text-lg font-semibold text-gray-500 pointer-events-none">$</span>
+          <input id="profitValue" type="text" inputmode="numeric" autocomplete="off" placeholder="1,000,000" class="w-full text-lg text-gray-900 bg-gray-50 border-[1.5px] border-gray-200 rounded-xl pl-9 pr-4 py-4 focus:outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100 transition"></div>
+      </div>
+      <p class="err text-sm text-red-500 mt-3 hidden">Please choose a measure and enter a figure.</p>
+      <div class="flex items-center justify-between mt-7"><button data-back class="btn-ghost">Back</button><button data-next="4" class="btn-primary">Continue</button></div>
+    </div></section>
+
+    <!-- STEP 5: GROWTH -->
+    <section class="step" data-step="5"><div class="q-inner">
+      <div class="text-[11px] font-bold tracking-widest uppercase text-blue-600 mb-4">Step 5 of 8</div>
+      <h1 class="font-serif text-3xl md:text-[2.6rem] leading-[1.08] text-gray-900 mb-3">How's revenue trending?</h1>
+      <p class="text-[15px] text-gray-500 mb-6">Over the last year or two.</p>
+      <div id="growthChoices" class="flex flex-col gap-2.5"></div>
+      <p class="err text-sm text-red-500 mt-3 hidden">Please pick one.</p>
+      <div class="flex items-center justify-between mt-7"><button data-back class="btn-ghost">Back</button><button data-next="5" class="btn-primary">Continue</button></div>
+    </div></section>
+
+    <!-- STEP 6: RECURRING -->
+    <section class="step" data-step="6"><div class="q-inner">
+      <div class="text-[11px] font-bold tracking-widest uppercase text-blue-600 mb-4">Step 6 of 8</div>
+      <h1 class="font-serif text-3xl md:text-[2.6rem] leading-[1.08] text-gray-900 mb-3">Is your revenue recurring or one-off?</h1>
+      <p class="text-[15px] text-gray-500 mb-6">How is your revenue split between the two?</p>
+      <div id="recurChoices" class="flex flex-col gap-2.5"></div>
+      <p class="err text-sm text-red-500 mt-3 hidden">Please pick one.</p>
+      <div class="flex items-center justify-between mt-7"><button data-back class="btn-ghost">Back</button><button data-next="6" class="btn-primary">Continue</button></div>
+    </div></section>
+
+    <!-- STEP 7: OWNER DEPENDENCE -->
+    <section class="step" data-step="7"><div class="q-inner">
+      <div class="text-[11px] font-bold tracking-widest uppercase text-blue-600 mb-4">Step 7 of 8</div>
+      <h1 class="font-serif text-3xl md:text-[2.6rem] leading-[1.08] text-gray-900 mb-3">How much runs through you?</h1>
+      <p class="text-[15px] text-gray-500 mb-6">If you stepped back for three months, what would happen?</p>
+      <div id="ownerChoices" class="flex flex-col gap-2.5"></div>
+      <p class="err text-sm text-red-500 mt-3 hidden">Please pick one.</p>
+      <div class="flex items-center justify-between mt-7"><button data-back class="btn-ghost">Back</button><button data-next="7" class="btn-primary">Continue</button></div>
+    </div></section>
+
+    <!-- STEP 8: NAME -->
+    <section class="step" data-step="8"><div class="q-inner">
+      <div class="text-[11px] font-bold tracking-widest uppercase text-blue-600 mb-4">Step 8 of 8</div>
+      <h1 class="font-serif text-3xl md:text-[2.6rem] leading-[1.08] text-gray-900 mb-7">Your name</h1>
+      <input id="userName" type="text" autocomplete="off" placeholder="Jane Smith" class="w-full text-lg text-gray-900 bg-gray-50 border-[1.5px] border-gray-200 rounded-xl px-4 py-4 focus:outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100 transition">
+      <p class="err text-sm text-red-500 mt-2 hidden">Please enter your name.</p>
+      <div class="flex items-center justify-between mt-7"><button data-back class="btn-ghost">Back</button><button data-next="8" class="btn-primary">Continue</button></div>
+    </div></section>
+
+    <!-- STEP 9: REVIEW + CONSENT -->
+    <section class="step" data-step="9"><div class="q-inner">
+      <div class="text-[11px] font-bold tracking-widest uppercase text-blue-500 mb-4">Almost there</div>
+      <h1 id="reviewHead" class="font-serif text-3xl md:text-[2.4rem] leading-[1.1] text-gray-900 mb-6 md:whitespace-nowrap">Ready for your estimate?</h1>
+      <div id="recap" class="bg-gray-50 border border-gray-200/70 rounded-xl divide-y divide-gray-200/70 mb-6 text-sm"></div>
+      <label class="flex items-start gap-3 cursor-pointer select-none mb-2">
+        <input id="consent" type="checkbox" class="mt-0.5 w-5 h-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 shrink-0">
+        <span class="text-sm text-gray-500 leading-relaxed">I agree that Coldclick can use the details I've entered to prepare my valuation and may contact me about it.</span>
+      </label>
+      <p class="err text-sm text-red-500 mt-1 hidden">Please tick the box to continue.</p>
+      <div class="flex items-center justify-between mt-7"><button data-back class="btn-ghost">Back</button><button id="submitBtn" class="btn-primary">Submit</button></div>
+    </div></section>
+
+    <!-- STEP 10: CALCULATING -->
+    <section class="step" data-step="10"><div class="q-inner">
+      <div class="py-6 text-center">
+        <h1 class="font-serif text-3xl md:text-[2.4rem] leading-[1.1] text-gray-900 mb-8">Working out your valuation...</h1>
+        <div class="calc-track max-w-sm mx-auto mb-6"><div class="calc-fill" id="calcFill"></div></div>
+        <p id="calcStatus" class="text-[15px] text-gray-500 mb-2 h-6 transition-opacity">Looking at your business...</p>
+        <p class="text-[13px] text-gray-400">This usually takes a moment.</p>
+      </div>
+    </div></section>
+
+    <!-- STEP 11: RESULT -->
+    <section class="step" data-step="11"><div class="q-inner">
+      <div class="text-center pt-2 pb-1">
+        <p id="resultLabel" class="text-[15px] font-medium text-gray-500 mb-3">Your business could be worth roughly</p>
+        <div id="rangeOut" class="font-serif text-[2.9rem] md:text-[4rem] leading-[1.02] text-gray-900 tracking-tight">&mdash;</div>
+      </div>
+      <p class="text-[12px] leading-relaxed text-gray-400 mt-5 mb-8 text-center max-w-md mx-auto">
+        <span class="font-bold text-gray-500">Disclaimer:</span> This is a rough estimate, not a formal valuation. Coldclick is not an advisor. For an accurate understanding of what your business could sell for, always speak to a professional.
+      </p>
+      <div class="bg-gradient-to-br from-white to-gray-50 border border-gray-200/70 rounded-2xl p-6 md:p-7 mb-7 relative overflow-hidden">
+        <h3 class="text-sm font-bold text-gray-900 mb-4">How to increase your valuation</h3>
+        <div id="leverList" class="flex flex-col gap-3.5"></div>
+        <p class="text-[13px] text-gray-500 mt-5 leading-relaxed">To see the full list of ways to improve your valuation, speak to an advisor. Working with an advisor helps you with the following:</p>
+      </div>
+      <div class="flex flex-col gap-4 mb-8">
+        <div class="flex items-start gap-3.5">
+          <span class="shrink-0 w-9 h-9 rounded-lg bg-blue-50 grid place-items-center text-blue-600">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </span>
+          <div><div class="text-sm font-bold text-gray-900">Get a better price</div><div class="text-[13px] text-gray-500">Advisors position your business and push buyers to their best offer.</div></div>
+        </div>
+        <div class="flex items-start gap-3.5">
+          <span class="shrink-0 w-9 h-9 rounded-lg bg-blue-50 grid place-items-center text-blue-600">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </span>
+          <div><div class="text-sm font-bold text-gray-900">Create competition</div><div class="text-[13px] text-gray-500">Advisors bring several buyers to the table, so price and terms move in your favor.</div></div>
+        </div>
+        <div class="flex items-start gap-3.5">
+          <span class="shrink-0 w-9 h-9 rounded-lg bg-blue-50 grid place-items-center text-blue-600">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </span>
+          <div><div class="text-sm font-bold text-gray-900">Keep running your business</div><div class="text-[13px] text-gray-500">Advisors handle the whole sale process, so you stay focused on running the business.</div></div>
+        </div>
+        <div class="flex items-start gap-3.5">
+          <span class="shrink-0 w-9 h-9 rounded-lg bg-blue-50 grid place-items-center text-blue-600">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </span>
+          <div><div class="text-sm font-bold text-gray-900">Keep it confidential</div><div class="text-[13px] text-gray-500">Advisors run the sale quietly, so staff and competitors don't find out before you're ready.</div></div>
+        </div>
+      </div>
+      <a href="/" class="block w-full text-center font-medium text-white bg-blue-500 hover:bg-blue-700 rounded-full py-4 text-[17px] shadow-md hover:shadow-lg hover:shadow-blue-500/20 transition-all">Speak to an advisor for free</a>
+      <button id="restart" class="w-full text-center text-[13px] font-semibold text-gray-400 hover:text-gray-700 mt-4 underline underline-offset-2">Start over</button>
+    </div></section>
+
+  </div>
+  <p id="footNote" class="text-center text-[12px] text-gray-400 mt-6 max-w-5xl w-full mx-auto">Takes about two minutes. No financials to upload, nothing to sign.</p>
+</main>
+
+<script>
+/* =============================================================================
+   DATA COLLECTION CONFIG
+   >>> PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL BELOW <<<
+   Until this is set, the page works fully but sends nothing (safe to test).
+   ============================================================================= */
+const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbx6pFS67dZ0ivLr1Bj5WpfbXDBTnruxIjqhlvHxvzakiilorjl_79Rvv2qykIF1wOTB/exec"; // Google Apps Script Web App
+
+// unique id per visitor so review + submit update the same sheet row
+const LEAD_ID = "cc_" + Date.now().toString(36) + Math.random().toString(36).slice(2,8);
+let firedReview = false; // avoid duplicate review rows
+
+function collectData(submitted){
+  const industry = (S.industryKey==="general" && S.customDesc) ? S.customDesc
+                 : (INDUSTRIES[S.industryKey] ? INDUSTRIES[S.industryKey].name : "");
+  const profitLabel = (PROFIT_TYPES.find(t=>t.key===S.profitType)||{}).label || "";
+  const profitVal = S.profitType==="margin"
+                  ? (S.marginPct!=null ? (Math.round(S.marginPct*100)+"%") : "")
+                  : (S.profitValue!=null ? S.profitValue : "");
+  return {
+    lead_id: LEAD_ID,
+    submitted: submitted ? "Yes" : "No",
+    timestamp: new Date().toISOString(),
+    name: S.name || "",
+    company: S.company || "",
+    business_type: industry || "",
+    revenue: S.revenue!=null ? S.revenue : "",
+    profit_type: profitLabel,
+    profit_value: profitVal,
+    growth: S.growth!=null ? GROWTH[S.growth].label : "",
+    revenue_recurring: S.recur!=null ? RECUR[S.recur].label : "",
+    owner_dependence: S.owner!=null ? OWNER[S.owner].label : "",
+    est_low: (window.__estLow!=null) ? window.__estLow : "",
+    est_high: (window.__estHigh!=null) ? window.__estHigh : "",
+    consent: (document.getElementById("consent") && document.getElementById("consent").checked) ? "Yes" : "No"
+  };
+}
+function fireData(submitted){
+  if(!WEBHOOK_URL) return; // not configured yet — do nothing
+  try{
+    fetch(WEBHOOK_URL, {
+      method:"POST",
+      mode:"no-cors",                       // Apps Script web app: no-cors avoids preflight
+      headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body: JSON.stringify(collectData(submitted))
+    });
+  }catch(e){ /* never block the UX on a logging failure */ }
+}
+
+const INDUSTRIES = {
+  accounting:{name:"Accounting & Bookkeeping",lo:3.5,hi:5.5},
+  auto:{name:"Auto & Vehicle Services",lo:2.6,hi:3.9},
+  beauty:{name:"Beauty & Personal Care",lo:2.4,hi:3.7},
+  consumer:{name:"Consumer Services",lo:2.6,hi:3.9},
+  creative:{name:"Creative & Media Production",lo:2.9,hi:4.7},
+  ecommerce:{name:"E-commerce & Retail",lo:2.8,hi:4.6},
+  education:{name:"Education & Training",lo:3.1,hi:4.9},
+  energy:{name:"Energy & Environmental",lo:3.3,hi:5.6},
+  financial:{name:"Financial Services",lo:3.8,hi:6.6},
+  fitness:{name:"Fitness & Wellness",lo:2.5,hi:4.1},
+  food:{name:"Food & Beverage Production",lo:3.1,hi:5.1},
+  healthcare:{name:"Healthcare & Practices",lo:3.8,hi:6.1},
+  homeservices:{name:"Home & Field Services",lo:2.7,hi:4.2},
+  hospitality:{name:"Hospitality & Food Service",lo:2.2,hi:3.4},
+  itmsp:{name:"IT & Managed Services",lo:3.8,hi:6.1},
+  legal:{name:"Legal Services",lo:3.3,hi:5.1},
+  logistics:{name:"Logistics & Transport",lo:3.1,hi:4.9},
+  manufacturing:{name:"Manufacturing & Print",lo:3.3,hi:5.6},
+  marketing:{name:"Marketing & Agencies",lo:3.1,hi:5.1},
+  professional:{name:"Professional Services",lo:3.3,hi:5.1},
+  realestate:{name:"Real Estate & Property",lo:3.1,hi:5.1},
+  security:{name:"Security Services",lo:2.9,hi:4.5},
+  software:{name:"Software & SaaS",lo:4.2,hi:8.0},
+  general:{name:"General Business",lo:2.8,hi:4.6}
+};
+const TYPE_ADJUST = {ebitda:1.00,sde:0.95,net:1.10,gross:0.45,margin:1.00};
+const VOCAB = [
+  ["accounting","accounting"],["accountant","accounting"],["bookkeeping","accounting"],["cpa","accounting"],["tax","accounting"],["payroll","accounting"],["audit","accounting"],
+  ["law firm","legal"],["lawyer","legal"],["attorney","legal"],["legal","legal"],["solicitor","legal"],
+  ["auto repair","auto"],["car repair","auto"],["body shop","auto"],["mechanic","auto"],["auto dealer","auto"],["car dealership","auto"],["tire shop","auto"],["auto detailing","auto"],["car wash","auto"],["fleet service","auto"],["automotive","auto"],
+  ["salon","beauty"],["hair salon","beauty"],["spa","beauty"],["barber","beauty"],["nail salon","beauty"],["aesthetics","beauty"],["med spa","beauty"],["beauty","beauty"],["cosmetics","beauty"],
+  ["laundry","consumer"],["dry cleaning","consumer"],["photography","consumer"],["funeral","consumer"],["locksmith","consumer"],["moving service","consumer"],["storage","consumer"],
+  ["video production","creative"],["film production","creative"],["media production","creative"],["production studio","creative"],["videography","creative"],["animation","creative"],["podcast","creative"],["content studio","creative"],["photography studio","creative"],
+  ["ecommerce","ecommerce"],["e-commerce","ecommerce"],["online store","ecommerce"],["retail","ecommerce"],["shop","ecommerce"],["store","ecommerce"],["dtc","ecommerce"],["amazon seller","ecommerce"],["boutique","ecommerce"],
+  ["education","education"],["training","education"],["tutoring","education"],["school","education"],["coaching","education"],["e-learning","education"],["childcare","education"],["daycare","education"],["academy","education"],
+  ["solar","energy"],["renewable energy","energy"],["energy","energy"],["waste management","energy"],["recycling","energy"],["environmental","energy"],["ev charging","energy"],["utilities","energy"],
+  ["financial planning","financial"],["wealth management","financial"],["wealth advisory","financial"],["wealth advisers","financial"],["rias","financial"],["ria","financial"],["asset management","financial"],["investment advisory","financial"],["lending","financial"],["lending firm","financial"],["residential lender","financial"],["credit servicing","financial"],["loan servicing","financial"],["reits","financial"],["insurance","professional"],["insurance agency","professional"],["insurance broker","professional"],["mortgage broker","financial"],
+  ["gym","fitness"],["fitness","fitness"],["yoga studio","fitness"],["pilates","fitness"],["wellness","fitness"],["personal training","fitness"],["crossfit","fitness"],["health club","fitness"],
+  ["brewery","food"],["distillery","food"],["winery","food"],["food manufacturer","food"],["food production","food"],["beverage","food"],["bakery production","food"],["coffee roaster","food"],["packaged food","food"],
+  ["dental","healthcare"],["dentist","healthcare"],["dental practice","healthcare"],["medical","healthcare"],["clinic","healthcare"],["doctor","healthcare"],["physical therapy","healthcare"],["chiropractic","healthcare"],["veterinary","healthcare"],["vet","healthcare"],["optometry","healthcare"],["caregiving","healthcare"],["home health","healthcare"],["health care","healthcare"],["nursing","healthcare"],["skilled nursing","healthcare"],["pharmacy","healthcare"],["medical practice","healthcare"],["mental health","healthcare"],["therapy","healthcare"],
+  ["hvac","homeservices"],["plumbing","homeservices"],["plumber","homeservices"],["electrician","homeservices"],["electrical","homeservices"],["landscaping","homeservices"],["lawn care","homeservices"],["lawn","homeservices"],["pest control","homeservices"],["cleaning","homeservices"],["janitorial","homeservices"],["pool service","homeservices"],["garage door","homeservices"],["painting","homeservices"],["painter","homeservices"],["tree service","homeservices"],["handyman","homeservices"],["grounds maintenance","homeservices"],["gutter","homeservices"],["window cleaning","homeservices"],["fencing","homeservices"],["roofing","homeservices"],["roofer","homeservices"],
+  ["restaurant","hospitality"],["cafe","hospitality"],["catering","hospitality"],["bar","hospitality"],["hotel","hospitality"],["bakery","hospitality"],["food truck","hospitality"],["coffee shop","hospitality"],["pub","hospitality"],
+  ["msp","itmsp"],["managed services","itmsp"],["it services","itmsp"],["it support","itmsp"],["it","itmsp"],["cybersecurity","itmsp"],["network","itmsp"],["cloud services","itmsp"],["managed it","itmsp"],
+  ["software","software"],["saas","software"],["app","software"],["platform","software"],["software development","software"],["tech company","software"],["technology","software"],["web development","software"],
+  ["logistics","logistics"],["trucking","logistics"],["freight","logistics"],["shipping","logistics"],["transport","logistics"],["courier","logistics"],["warehouse","logistics"],["delivery","logistics"],["moving company","logistics"],["fleet","logistics"],["3pl","logistics"],["distribution","logistics"],
+  ["manufacturing","manufacturing"],["manufacturer","manufacturing"],["factory","manufacturing"],["fabrication","manufacturing"],["metal casting","manufacturing"],["machining","manufacturing"],["production","manufacturing"],["assembly","manufacturing"],["industrial","manufacturing"],["textile","manufacturing"],["furniture","manufacturing"],["printing","manufacturing"],["commercial printer","manufacturing"],["print shop","manufacturing"],["signage","manufacturing"],["packaging","manufacturing"],["cabinetry","manufacturing"],["millwork","manufacturing"],["steel","manufacturing"],
+  ["marketing","marketing"],["marketing agency","marketing"],["advertising","marketing"],["agency","marketing"],["seo","marketing"],["design agency","marketing"],["pr","marketing"],["creative agency","marketing"],["digital marketing","marketing"],["branding","marketing"],
+  ["consulting","professional"],["consultant","professional"],["engineering","professional"],["architecture","professional"],["architect","professional"],["surveying","professional"],["hr","professional"],["staffing","professional"],["recruiting","professional"],["advisory","professional"],
+  ["real estate","realestate"],["property management","realestate"],["property","realestate"],["realtor","realestate"],["real estate brokerage","realestate"],["rental property","realestate"],["vacation rental","realestate"],["manufactured housing","realestate"],["real estate investment","realestate"],["commercial real estate","realestate"],
+  ["security","security"],["alarm","security"],["surveillance","security"],["security guard","security"],["access control","security"],["cctv","security"],["fire protection","security"]
+];
+const GROWTH = [
+  {label:"Growing fast",sub:"Rapid yearly growth",lo:0.6,hi:1.2,tag:"up"},
+  {label:"Growing",sub:"Strong yearly growth",lo:0.3,hi:0.6,tag:"up"},
+  {label:"Steady",sub:"About the same",lo:0.0,hi:0.0,tag:"flat"},
+  {label:"Slowing down",sub:"Down a little lately",lo:-0.4,hi:-0.6,tag:"down",weak:"growth"}
+];
+const RECUR = [
+  {label:"Mostly recurring",sub:"Contracts, retainers, or repeat business",lo:0.4,hi:0.7,tag:"up"},
+  {label:"A mix",sub:"Some repeat, some one-off",lo:0.1,hi:0.2,tag:"flat",weak:"recur_mix"},
+  {label:"Mostly one-off",sub:"New jobs or sales each time",lo:-0.2,hi:-0.3,tag:"down",weak:"recur_low"}
+];
+const OWNER = [
+  {label:"It runs without me",sub:"The team handles the day to day",lo:0.3,hi:0.6,tag:"up"},
+  {label:"Somewhat depends on me",sub:"I'm involved, but not in everything",lo:0.0,hi:0.0,tag:"flat",weak:"owner_mid"},
+  {label:"It heavily depends on me",sub:"Not much happens without me",lo:-0.3,hi:-0.5,tag:"down",weak:"owner_high"}
+];
+/* ---- Improvement blocks: keyed to a weakness, each self-contained & reads well ---- */
+const LEVER_BLOCKS = {
+  growth:      "Getting revenue growing again will increase the multiple buyers are willing to pay.",
+  recur_mix:   "Moving more of your revenue to contracts or retainers will increase the multiple buyers are willing to pay.",
+  recur_low:   "Building recurring revenue will increase the multiple buyers are willing to pay.",
+  owner_mid:   "Reducing how much the business relies on you day to day will increase what a buyer will pay.",
+  owner_high:  "Making the business able to run without you will significantly increase what a buyer will pay.",
+  // generic fallbacks (used if they answered everything well)
+  g_books:     "Cleaning up your financials before going to market will strengthen your final price.",
+  g_timing:    "Timing the sale to the right market and buyer pool will lift your final number.",
+  g_position:  "Positioning the business well to buyers will raise what they are willing to pay.",
+  g_concentration:"Spreading revenue across more customers will reduce risk and raise your price.",
+  g_docs:      "Tightening up your contracts and systems will make the sale smoother and the price stronger."
+};
+const GENERIC_ORDER = ["g_books","g_position","g_timing","g_concentration","g_docs"];
+const PROFIT_TYPES = [
+  {key:"net",label:"Net profit",gloss:"Your bottom line after costs"},
+  {key:"ebitda",label:"EBITDA",gloss:"Earnings before interest, tax, and depreciation"},
+  {key:"sde",label:"SDE",gloss:"What you take home, including your salary and perks"},
+  {key:"gross",label:"Gross profit",gloss:"Revenue minus direct costs"},
+  {key:"margin",label:"Profit margin (%)",gloss:"Roughly what % of revenue you keep"}
+];
+
+const S = {step:0,company:"",industryKey:null,industryLabel:"",customDesc:"",revenue:null,profitType:null,profitValue:null,marginPct:null,growth:null,recur:null,owner:null,name:""};
+const TOTAL_Q = 8;           // question steps that show progress (steps 1..8)
+let returnToReview = false;   // when editing from the review page
+
+const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
+const steps=$$(".step");
+function money(n){if(n>=1000000){const m=n/1000000;return "$"+(m>=10?Math.round(m):(Math.round(m*10)/10)).toString().replace(/\.0$/,"")+"M";}if(n>=1000)return "$"+Math.round(n/1000)+"K";return "$"+Math.round(n);}
+function num(v){const n=parseFloat((v||"").replace(/[^0-9.]/g,""));return isNaN(n)?null:n;}
+function commafy(v){const d=(v||"").replace(/[^0-9]/g,"");return d?Number(d).toLocaleString("en-US"):"";}
+function titleCase(str){return (str||"").toLowerCase().replace(/\b([a-z])/g,(m,c)=>c.toUpperCase());}
+function showErr(sec,on){const e=sec.querySelector(".err");if(e)e.classList.toggle("hidden",!on);}
+
+(function(){const w=$("#progressWrap");for(let i=0;i<TOTAL_Q;i++){const s=document.createElement("div");s.className="seg";w.appendChild(s);}})();
+function paintProgress(){
+  const segs=$$("#progressWrap .seg");
+  // progress reflects question steps 1..8 -> index 0..7
+  const qIndex = S.step-1;
+  segs.forEach((s,i)=>{ s.className="seg"+(i<qIndex?" done":i===qIndex?" active":""); });
+  $("#progressWrap").style.visibility = (S.step>=1 && S.step<=TOTAL_Q)?"visible":"hidden";
+  const fn=$("#footNote"); if(fn) fn.style.display = (S.step>=1 && S.step<=TOTAL_Q)?"block":"none";
+}
+function goto(step){
+  S.step=step;
+  steps.forEach(s=>s.classList.toggle("on",+s.dataset.step===step));
+  paintProgress();
+  window.scrollTo({top:0,behavior:"smooth"});
+  if(step===1) setTimeout(()=>$("#bizName").focus(),120);
+  if(step===2){ updateQ2Head(); setTimeout(()=>$("#bizDesc").focus(),120); }
+  if(step===3) setTimeout(()=>$("#revenue").focus(),120);
+  if(step===8) setTimeout(()=>$("#userName").focus(),120);
+  if(step===9){ buildRecap(); if(!firedReview){ firedReview=true; fireData(false); } }
+}
+$$("[data-back]").forEach(b=>b.addEventListener("click",()=>goto(S.step-1)));
+$$("[data-goto]").forEach(b=>b.addEventListener("click",()=>goto(+b.dataset.goto)));
+
+$("#bizName").addEventListener("input",e=>{S.company=e.target.value.trim();showErr(steps[1],false);});
+function updateQ2Head(){$("#q2head").textContent=S.company?`What does ${S.company} do?`:"What does your business do?";}
+
+const descInput=$("#bizDesc"), suggBox=$("#suggestions");
+function matches(query){const q=query.toLowerCase().trim();if(!q)return[];const words=q.split(/\s+/);const best={};VOCAB.forEach(([phrase,key])=>{const p=phrase.toLowerCase();let s=0;if(p===q)s=100;else if(p.includes(q)||q.includes(p))s=70;else{let o=0;words.forEach(w=>{if(w.length>2&&p.split(/\s+/).some(x=>x.includes(w)||w.includes(x)))o++;});if(o)s=30+o*12;}if(s>0&&s>(best[key]||0))best[key]=s;});return Object.keys(best).map(k=>({key:k,score:best[k]})).sort((a,b)=>b.score-a.score).slice(0,3);}
+function suggChip(labelHTML,onClick,selected){const b=document.createElement("button");b.className="w-full flex items-center justify-between gap-3 text-left px-4 py-3.5 border-[1.5px] rounded-xl bg-white cursor-pointer transition "+(selected?"border-blue-600 bg-blue-50":"border-gray-200 hover:border-blue-500 hover:bg-blue-50");b.innerHTML=`<span class="text-[15px] font-semibold text-gray-900">${labelHTML}</span><span class="text-[12px] text-gray-400 font-semibold">select</span>`;b.addEventListener("click",onClick);return b;}
+function renderSuggestions(query){suggBox.innerHTML="";const ms=matches(query);if(!ms.length){if(query.trim().length>1){const d=document.createElement("p");d.className="text-[13px] text-gray-400";d.textContent="No close match yet. Keep typing, or browse the full list below.";suggBox.appendChild(d);$("#browse").open=true;}if(query.trim().length>2)suggBox.appendChild(somethingElseChip(query));return;}ms.forEach(m=>{suggBox.appendChild(suggChip(INDUSTRIES[m.key].name,()=>selectIndustry(m.key),S.industryKey===m.key));});if(query.trim().length>2)suggBox.appendChild(somethingElseChip(query));}
+function somethingElseChip(query){const b=document.createElement("button");b.className="w-full flex items-center justify-between gap-3 text-left px-4 py-3.5 border-[1.5px] border-dashed rounded-xl bg-white cursor-pointer transition "+(S.industryKey==="general"?"border-blue-600 bg-blue-50":"border-gray-300 hover:border-blue-500 hover:bg-blue-50");b.innerHTML=`<span class="text-[15px] font-semibold text-gray-900">Something else &mdash; "<span class="text-gray-500">${query.replace(/</g,'&lt;')}</span>"</span><span class="text-[12px] text-gray-400 font-semibold">use this</span>`;b.addEventListener("click",()=>{S.industryKey="general";S.industryLabel="General Business";S.customDesc=titleCase(query.trim());renderSuggestions(descInput.value);showErr(steps[2],false);});return b;}
+function selectIndustry(key){S.industryKey=key;S.industryLabel=INDUSTRIES[key].name;S.customDesc="";renderSuggestions(descInput.value);showErr(steps[2],false);}
+descInput.addEventListener("input",e=>{S.industryKey=null;renderSuggestions(e.target.value);});
+(function(){const g=$("#catGrid");Object.keys(INDUSTRIES).filter(k=>k!=="general").sort((a,b)=>INDUSTRIES[a].name.localeCompare(INDUSTRIES[b].name)).forEach(key=>{const b=suggChip(INDUSTRIES[key].name,()=>{selectIndustry(key);descInput.value=INDUSTRIES[key].name;$("#browse").open=false;$$("#catGrid button").forEach(x=>x.classList.remove("border-blue-600","bg-blue-50"));b.classList.add("border-blue-600","bg-blue-50");},false);g.appendChild(b);});})();
+
+$("#revenue").addEventListener("input",e=>{e.target.value=commafy(e.target.value);S.revenue=num(e.target.value);showErr(steps[3],false);});
+
+(function(){const box=$("#profitTypes");PROFIT_TYPES.forEach(t=>{const c=document.createElement("button");c.className="w-full flex items-center gap-3.5 text-left px-4 py-3.5 border-[1.5px] border-gray-200 rounded-xl bg-white cursor-pointer transition hover:border-blue-500";c.dataset.key=t.key;c.innerHTML=`<span class="dot shrink-0 w-5 h-5 rounded-full border-2 border-gray-200 relative"></span><span><span class="block text-[15px] font-semibold text-gray-900">${t.label}</span><span class="block text-[13px] text-gray-500">${t.gloss}</span></span>`;c.addEventListener("click",()=>selectProfitType(t.key,c));box.appendChild(c);});})();
+function selectProfitType(key,el){S.profitType=key;$$("#profitTypes button").forEach(b=>{b.classList.remove("border-blue-600","bg-blue-50");b.querySelector(".dot").classList.remove("border-blue-600");b.querySelector(".dot").innerHTML="";});el.classList.add("border-blue-600","bg-blue-50");const dot=el.querySelector(".dot");dot.classList.add("border-blue-600");dot.innerHTML='<span class="absolute inset-[3px] rounded-full bg-blue-600"></span>';$("#profitEntry").classList.remove("hidden");const pv=$("#profitValue"),pre=$("#profitPrefix");S.profitValue=null;S.marginPct=null;pv.value="";if(key==="margin"){pre.textContent="%";pre.classList.remove("left-4");pre.classList.add("right-4","left-auto");pv.classList.remove("pl-9","pr-4");pv.classList.add("pr-9","pl-4");pv.placeholder="20";}else{pre.textContent="$";pre.classList.remove("right-4","left-auto");pre.classList.add("left-4");pv.classList.remove("pr-9","pl-4");pv.classList.add("pl-9","pr-4");pv.placeholder="1,000,000";}setTimeout(()=>pv.focus(),80);showErr(steps[4],false);}
+$("#profitValue").addEventListener("input",e=>{if(S.profitType==="margin"){let v=e.target.value.replace(/[^0-9.]/g,"");e.target.value=v;const n=num(v);S.marginPct=(n!=null)?n/100:null;S.profitValue=null;}else{e.target.value=commafy(e.target.value);S.profitValue=num(e.target.value);S.marginPct=null;}showErr(steps[4],false);});
+
+function buildChoices(containerId,data,stateKey,stepIdx){const box=$("#"+containerId);data.forEach((opt,i)=>{const c=document.createElement("button");c.className="w-full flex items-center gap-3.5 text-left px-4 py-4 border-[1.5px] border-gray-200 rounded-xl bg-white cursor-pointer transition hover:border-blue-500";c.innerHTML=`<span class="dot shrink-0 w-5 h-5 rounded-full border-2 border-gray-200 relative"></span><span><span class="block text-[15px] font-semibold text-gray-900">${opt.label}</span><span class="block text-[13px] text-gray-500">${opt.sub}</span></span>`;c.addEventListener("click",()=>{$$("#"+containerId+" button").forEach(b=>{b.classList.remove("border-blue-600","bg-blue-50");b.querySelector(".dot").classList.remove("border-blue-600");b.querySelector(".dot").innerHTML="";});c.classList.add("border-blue-600","bg-blue-50");const dot=c.querySelector(".dot");dot.classList.add("border-blue-600");dot.innerHTML='<span class="absolute inset-[3px] rounded-full bg-blue-600"></span>';S[stateKey]=i;showErr(steps[stepIdx],false);});box.appendChild(c);});}
+buildChoices("growthChoices",GROWTH,"growth",5);
+buildChoices("recurChoices",RECUR,"recur",6);
+buildChoices("ownerChoices",OWNER,"owner",7);
+function paintChoiceSelection(containerId,idx){if(idx==null)return;const btns=$$("#"+containerId+" button");btns.forEach((b,i)=>{b.classList.toggle("border-blue-600",i===idx);b.classList.toggle("bg-blue-50",i===idx);const dot=b.querySelector(".dot");if(i===idx){dot.classList.add("border-blue-600");dot.innerHTML='<span class="absolute inset-[3px] rounded-full bg-blue-600"></span>';}else{dot.classList.remove("border-blue-600");dot.innerHTML="";}});}
+
+$("#userName").addEventListener("input",e=>{S.name=e.target.value.trim();showErr(steps[8],false);});
+
+/* ---- review page ---- */
+function buildRecap(){
+  const r=$("#recap");
+  $("#reviewHead").textContent = S.name ? `Ready for your valuation, ${S.name.split(/\s+/)[0]}?` : "Ready for your valuation?";
+  const industry = S.industryKey==="general" && S.customDesc ? S.customDesc : S.industryLabel;
+  const profitLabel = (PROFIT_TYPES.find(t=>t.key===S.profitType)||{}).label || "Profit";
+  const profitShown = S.profitType==="margin" ? ((S.marginPct!=null)?Math.round(S.marginPct*100)+"%":"—") : (S.profitValue!=null?money(S.profitValue):"—");
+  const rows=[
+    ["Your name", S.name||"—", 8],
+    ["Business", S.company||"—", 1],
+    ["Type", industry||"—", 2],
+    ["Revenue", S.revenue!=null?money(S.revenue):"—", 3],
+    [profitLabel, profitShown, 4],
+    ["Growth", S.growth!=null?GROWTH[S.growth].label:"—", 5],
+    ["Revenue type", S.recur!=null?RECUR[S.recur].label:"—", 6],
+    ["Owner role", S.owner!=null?OWNER[S.owner].label:"—", 7]
+  ];
+  r.innerHTML=rows.map(([k,v,stp])=>`<div class="flex items-center justify-between px-4 py-3 gap-3"><span class="text-gray-500 shrink-0">${k}</span><span class="flex items-center gap-3 min-w-0"><span class="font-semibold text-gray-900 truncate">${v}</span><button data-edit="${stp}" class="text-[12px] font-bold text-blue-600 hover:text-blue-800 shrink-0">Edit</button></span></div>`).join("");
+  $$("#recap [data-edit]").forEach(b=>b.addEventListener("click",()=>{ returnToReview=true; goto(+b.dataset.edit); }));
+}
+$("#consent").addEventListener("change",()=>showErr(steps[9],false));
+
+/* ---- validation ---- */
+function validate(step){
+  switch(step){
+    case 1: return !!S.company;
+    case 2: return !!S.industryKey;
+    case 3: return S.revenue!=null && S.revenue>0;
+    case 4: if(!S.profitType) return false; if(S.profitType==="margin") return S.marginPct!=null && S.marginPct>0; return S.profitValue!=null && S.profitValue>0;
+    case 5: return S.growth!=null;
+    case 6: return S.recur!=null;
+    case 7: return S.owner!=null;
+    case 8: return !!S.name;
+    default: return true;
+  }
+}
+$$("[data-next]").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const step=+btn.dataset.next;
+    if(!validate(step)){ showErr(steps[step],true); return; }
+    if(returnToReview){ returnToReview=false; goto(9); return; }
+    goto(step+1);
+  });
+});
+$("#submitBtn").addEventListener("click",()=>{ if(!$("#consent").checked){ showErr(steps[9],true); return; } fireData(true); runCalculating(); });
+
+/* ---- calculating ---- */
+function runCalculating(){
+  goto(10);
+  const fill=$("#calcFill"), status=$("#calcStatus");
+  const industry = S.industryKey==="general" ? (S.customDesc||"your business") : (S.industryLabel||"your business").toLowerCase();
+  const lines=[`Looking at ${S.company||"your business"}...`,`Comparing ${industry} businesses...`,`Working out your range...`];
+  let i=0; status.textContent=lines[0]; fill.style.width="0%";
+  const DURATION=8000,tick=100; let elapsed=0;
+  const timer=setInterval(()=>{
+    elapsed+=tick; fill.style.width=Math.min(100,(elapsed/DURATION)*100)+"%";
+    const idx=Math.min(lines.length-1,Math.floor(elapsed/(DURATION/lines.length)));
+    if(idx!==i){ i=idx; status.style.opacity=0; setTimeout(()=>{status.textContent=lines[i];status.style.opacity=1;},150); }
+    if(elapsed>=DURATION){ clearInterval(timer); computeAndShow(); }
+  },tick);
+}
+
+/* ---- compute + result ---- */
+function computeAndShow(){
+  const ind = INDUSTRIES[S.industryKey] || INDUSTRIES.general;
+  let earnings = (S.profitType==="margin") ? (S.revenue||0)*(S.marginPct||0) : (S.profitValue||0);
+  if(!earnings || earnings<=0) earnings=(S.revenue||0)*0.1;
+  const adj = TYPE_ADJUST[S.profitType] || 1.0;
+  let lo=ind.lo*adj, hi=ind.hi*adj;
+  const g=GROWTH[S.growth], r=RECUR[S.recur], o=OWNER[S.owner];
+  [g,r,o].forEach(f=>{ if(f){ lo+=f.lo; hi+=f.hi; } });
+  lo=Math.max(lo,1.0); hi=Math.max(hi,lo+0.6);
+  let vLo=earnings*lo, vHi=earnings*hi;
+  if(S.revenue){ const cap=S.revenue*3.0; if(vHi>cap && cap>vLo) vHi=cap; }
+  window.__estLow = Math.round(vLo); window.__estHigh = Math.round(vHi);
+  fireData(true); // update the row now that the estimate is computed
+
+  $("#resultLabel").textContent = S.company ? `${S.company} could be worth roughly` : "Your business could be worth roughly";
+  $("#rangeOut").innerHTML = `${money(vLo)}<span class="text-gray-400 text-[.55em] italic mx-2">to</span>${money(vHi)}`;
+
+  // pick levers from weaknesses, then fill with generics
+  const weak=[]; [g,r,o].forEach(f=>{ if(f&&f.weak) weak.push(f.weak); });
+  const chosen=[];
+  weak.forEach(k=>{ if(LEVER_BLOCKS[k] && chosen.length<3) chosen.push(LEVER_BLOCKS[k]); });
+  let gi=0; while(chosen.length<3){ chosen.push(LEVER_BLOCKS[GENERIC_ORDER[gi%GENERIC_ORDER.length]]); gi++; }
+  const list=$("#leverList"); list.innerHTML="";
+  chosen.slice(0,3).forEach((txt,idx)=>{
+    const row=document.createElement("div"); row.className="flex items-start gap-3";
+    const readable = idx===0;
+    row.innerHTML=`<span class="shrink-0 w-5 h-5 rounded-full bg-green-100 text-green-600 grid place-items-center text-[11px] font-bold mt-0.5">&uarr;</span><span class="text-[14px] text-gray-700 leading-snug ${readable?'':'locked-text'}">${txt}</span>`;
+    list.appendChild(row);
+  });
+  goto(11);
+}
+
+/* ---- restart ---- */
+$("#restart").addEventListener("click",()=>{
+  Object.assign(S,{step:0,company:"",industryKey:null,industryLabel:"",customDesc:"",revenue:null,profitType:null,profitValue:null,marginPct:null,growth:null,recur:null,owner:null,name:""});
+  returnToReview=false;
+  ["bizName","bizDesc","revenue","profitValue","userName"].forEach(id=>$("#"+id).value="");
+  $("#consent").checked=false; $("#profitEntry").classList.add("hidden"); suggBox.innerHTML="";
+  $$(".step .dot").forEach(d=>{d.classList.remove("border-blue-600");d.innerHTML="";});
+  $$("#profitTypes button,#growthChoices button,#recurChoices button,#ownerChoices button").forEach(b=>b.classList.remove("border-blue-600","bg-blue-50"));
+  $$(".err").forEach(e=>e.classList.add("hidden"));
+  goto(0);
+});
+
+/* ---- enter key ---- */
+document.addEventListener("keydown",e=>{
+  if(e.key!=="Enter") return;
+  if(S.step===0){ e.preventDefault(); document.querySelector('[data-goto="1"]').click(); }
+  else if(S.step>=1 && S.step<=8){ const b=document.querySelector(`[data-next="${S.step}"]`); if(b){e.preventDefault();b.click();} }
+  else if(S.step===9){ e.preventDefault(); $("#submitBtn").click(); }
+});
+
+paintProgress(); goto(0);
+</script>
+</body>
+</html>
