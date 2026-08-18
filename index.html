@@ -9,12 +9,13 @@
 <script src="https://unpkg.com/lucide@latest"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@300;400;500;600&amp;family=Montserrat:wght@300;400;500;600&amp;family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
 <style>
-/* Typography overrides */
-body { font-family: 'Inter', sans-serif; }
-.font-serif { font-family: 'Instrument Serif', serif; }
-.font-montserrat { font-family: 'Montserrat', sans-serif; }
+/* Typography. Two fonts only: a serif for titles, Manrope for everything else.
+   The serif stack is Tailwind's own font-serif value, stated explicitly so the
+   rendered face is deterministic rather than depending on which rule wins. */
+body { font-family: 'Manrope', sans-serif; }
+.font-serif { font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif; }
 .font-manrope { font-family: 'Manrope', sans-serif; }
 /* Animations */
 @keyframes fadeUp {
@@ -98,51 +99,7 @@ display: none;
  
  
  
-<link id="all-fonts-link-font-geist" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist">
-.font-geist { font-family: 'Geist', sans-serif !important; }
-</style><link id="all-fonts-link-font-roboto" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-roboto">
-.font-roboto { font-family: 'Roboto', sans-serif !important; }
-</style><link id="all-fonts-link-font-montserrat" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-montserrat">
-.font-montserrat { font-family: 'Montserrat', sans-serif !important; }
-</style><link id="all-fonts-link-font-poppins" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-poppins">
-.font-poppins { font-family: 'Poppins', sans-serif !important; }
-</style><link id="all-fonts-link-font-playfair" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&amp;display=swap"><style id="all-fonts-style-font-playfair">
-.font-playfair { font-family: 'Playfair Display', serif !important; }
-</style><link id="all-fonts-link-font-instrument-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-instrument-serif">
-.font-instrument-serif { font-family: 'Instrument Serif', serif !important; }
-</style><link id="all-fonts-link-font-merriweather" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&amp;display=swap"><style id="all-fonts-style-font-merriweather">
-.font-merriweather { font-family: 'Merriweather', serif !important; }
-</style><link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-bricolage">
-.font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }
-</style><link id="all-fonts-link-font-jakarta" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-jakarta">
-.font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif !important; }
-</style><link id="all-fonts-link-font-manrope" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-manrope">
-.font-manrope { font-family: 'Manrope', sans-serif !important; }
-</style><link id="all-fonts-link-font-space-grotesk" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-space-grotesk">
-.font-space-grotesk { font-family: 'Space Grotesk', sans-serif !important; }
-</style><link id="all-fonts-link-font-work-sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-work-sans">
-.font-work-sans { font-family: 'Work Sans', sans-serif !important; }
-</style><link id="all-fonts-link-font-pt-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&amp;display=swap"><style id="all-fonts-style-font-pt-serif">
-.font-pt-serif { font-family: 'PT Serif', serif !important; }
-</style><link id="all-fonts-link-font-geist-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist-mono">
-.font-geist-mono { font-family: 'Geist Mono', monospace !important; }
-</style><link id="all-fonts-link-font-space-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;display=swap"><style id="all-fonts-style-font-space-mono">
-.font-space-mono { font-family: 'Space Mono', monospace !important; }
-</style><link id="all-fonts-link-font-quicksand" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-quicksand">
-.font-quicksand { font-family: 'Quicksand', sans-serif !important; }
-</style><link id="all-fonts-link-font-nunito" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-nunito">
-.font-nunito { font-family: 'Nunito', sans-serif !important; }
-</style><link id="all-fonts-link-font-newsreader" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..800&amp;display=swap"><style id="all-fonts-style-font-newsreader">
-.font-newsreader { font-family: 'Newsreader', serif !important; }
-</style><link id="all-fonts-link-font-google-sans-flex" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-google-sans-flex">
-.font-google-sans-flex { font-family: 'Google Sans Flex', sans-serif !important; }
-</style><link id="all-fonts-link-font-oswald" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-oswald">
-.font-oswald { font-family: 'Oswald', sans-serif !important; }
-</style><link id="all-fonts-link-font-dm-sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-dm-sans">
-.font-dm-sans { font-family: 'DM Sans', sans-serif !important; }
-</style><link id="all-fonts-link-font-cormorant" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-cormorant">
-.font-cormorant { font-family: 'Cormorant Garamond', serif !important; }
-</style><style id="border-gradient-shared-style">
+<style id="border-gradient-shared-style">
   [style*="--border-gradient"]::before {
     content: "";
     position: absolute;
@@ -580,13 +537,13 @@ display: none;
     </div>
     <div class="w-full rounded-[2rem] border shadow-sm overflow-hidden bg-white border-gray-200">
       <!-- Calendly inline widget begin -->
-      <div class="calendly-inline-widget w-full" data-url="https://calendly.com/jonathan-coldclick/15-minute-intro-call?hide_gdpr_banner=1" style="position: relative; min-width: 100%; height: 1000px; width: 100%;" data-processed="true">
+      <div class="calendly-inline-widget w-full" data-url="https://calendly.com/jonathan-coldclick/15-minute-intro-call?hide_gdpr_banner=1&amp;primary_color=3b82f6" style="position: relative; min-width: 100%; height: 1000px; width: 100%;" data-processed="true">
         <div class="calendly-spinner">
           <div class="calendly-bounce1"></div>
           <div class="calendly-bounce2"></div>
           <div class="calendly-bounce3"></div>
         </div>
-        <iframe src="https://calendly.com/jonathan-coldclick/15-minute-intro-call?embed_domain=&amp;embed_type=Inline&amp;hide_gdpr_banner=1" width="100%" height="100%" frameborder="0" title="Select a Date &amp; Time - Calendly" class=""></iframe>
+        <iframe src="https://calendly.com/jonathan-coldclick/15-minute-intro-call?embed_domain=&amp;embed_type=Inline&amp;hide_gdpr_banner=1&amp;primary_color=3b82f6" width="100%" height="100%" frameborder="0" title="Select a Date &amp; Time - Calendly" class=""></iframe>
       </div>
       <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async=""></script>
       <!-- Calendly inline widget end -->
@@ -712,7 +669,13 @@ src: url(data:application/x-font-woff;charset=utf-8;base64,d09GMk9UVE8AAAaMAAwAA
   </div>
 
   <div class="max-w-7xl mx-auto mt-12 md:mt-16 pt-8 border-t text-center text-[10px] md:text-xs font-manrope border-gray-100 text-gray-400">
-    <p class="font-manrope">© 2026 Coldclick Consulting Ltd. All rights reserved.</p>
+    <p class="font-manrope">
+      © 2026 Coldclick Consulting Ltd. All rights reserved.
+      <span class="mx-1.5 text-gray-300">·</span>
+      <a href="/privacy" target="_blank" rel="noopener" class="underline underline-offset-2 transition-colors hover:text-gray-600">Privacy policy</a>
+      <span class="mx-1.5 text-gray-300">·</span>
+      <a href="/terms" target="_blank" rel="noopener" class="underline underline-offset-2 transition-colors hover:text-gray-600">Terms of use</a>
+    </p>
   </div>
 </footer>
  
