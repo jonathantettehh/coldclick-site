@@ -304,7 +304,7 @@
           <div><div class="text-sm font-bold text-gray-900">Keep it confidential</div><div class="text-[13px] text-gray-500">Advisors run the sale quietly, so staff and competitors don't find out before you're ready.</div></div>
         </div>
       </div>
-      <a href="/" class="block w-full text-center font-medium text-white bg-blue-500 hover:bg-blue-700 rounded-full py-4 text-[17px] shadow-md hover:shadow-lg hover:shadow-blue-500/20 transition-all">Speak to an advisor for free</a>
+      <a id="advisorCta" href="https://calendly.com/jonathan-coldclick/15-minute-intro-call" target="_blank" rel="noopener" class="block w-full text-center font-medium text-white bg-blue-500 hover:bg-blue-700 rounded-full py-4 text-[17px] shadow-md hover:shadow-lg hover:shadow-blue-500/20 transition-all">Speak to an advisor for free</a>
       <button id="restart" class="w-full text-center text-[13px] font-semibold text-gray-400 hover:text-gray-700 mt-4 underline underline-offset-2">Start over</button>
     </div></section>
 
@@ -347,6 +347,7 @@
 const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbx6pFS67dZ0ivLr1Bj5WpfbXDBTnruxIjqhlvHxvzakiilorjl_79Rvv2qykIF1wOTB/exec";
 
 /* visitor id, plus source + ref read off the query string (?s=reply&r=cc_123) */
+const CALENDAR_URL = "https://calendly.com/jonathan-coldclick/15-minute-intro-call";
 const LEAD_ID = "cc_" + Date.now().toString(36) + Math.random().toString(36).slice(2,8);
 const QS = new URLSearchParams(location.search);
 const SOURCE = (QS.get("s") || "").slice(0,40);
@@ -838,6 +839,15 @@ function showResult(){
   $("#resultLabel").textContent = S.company ? S.company+" could be worth roughly" : "Your business could be worth roughly";
   $("#rangeOut").innerHTML = money(vLo)+'<span class="text-gray-400 text-[.55em] italic mx-2">to</span>'+money(vHi);
   $("#emailNote").textContent = S.email ? "A copy has been sent to "+S.email+"." : "";
+
+  const cta=$("#advisorCta");
+  if(cta){
+    const qp=new URLSearchParams();
+    if(S.name)  qp.set("name", tidyName(S.name));
+    if(S.email) qp.set("email", S.email);
+    if(S.company) qp.set("a1", S.company);
+    cta.href = CALENDAR_URL + (qp.toString() ? "?" + qp.toString() : "");
+  }
 
   const g=GROWTH[S.growth], r=RECUR[S.recur], o=OWNER[S.owner];
   const weak=[]; [g,r,o].forEach(f=>{ if(f&&f.weak) weak.push(f.weak); });
