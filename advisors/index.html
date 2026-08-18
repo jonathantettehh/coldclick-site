@@ -9,12 +9,14 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=Inter:wght@300;400;500;600&amp;family=Montserrat:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
     <style>
-      /* Typography overrides */
-      body { font-family: 'Inter', sans-serif; }
-      .font-serif { font-family: 'Instrument Serif', serif; }
-      .font-montserrat { font-family: 'Montserrat', sans-serif; }
+      /* Typography. Two fonts only: a serif for titles, Manrope for everything else.
+         The serif stack is Tailwind's own font-serif value, stated explicitly so the
+         rendered face is deterministic rather than depending on which rule wins. */
+      body { font-family: 'Manrope', sans-serif; }
+      .font-serif { font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif; }
+      .font-manrope { font-family: 'Manrope', sans-serif; }
       /* Animations */
       @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
@@ -102,51 +104,7 @@
     
     
     
-  <link id="all-fonts-link-font-geist" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist">
-      .font-geist { font-family: 'Geist', sans-serif !important; }
-    </style><link id="all-fonts-link-font-roboto" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-roboto">
-      .font-roboto { font-family: 'Roboto', sans-serif !important; }
-    </style><link id="all-fonts-link-font-montserrat" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-montserrat">
-      .font-montserrat { font-family: 'Montserrat', sans-serif !important; }
-    </style><link id="all-fonts-link-font-poppins" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-poppins">
-      .font-poppins { font-family: 'Poppins', sans-serif !important; }
-    </style><link id="all-fonts-link-font-playfair" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&amp;display=swap"><style id="all-fonts-style-font-playfair">
-      .font-playfair { font-family: 'Playfair Display', serif !important; }
-    </style><link id="all-fonts-link-font-instrument-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-instrument-serif">
-      .font-instrument-serif { font-family: 'Instrument Serif', serif !important; }
-    </style><link id="all-fonts-link-font-merriweather" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&amp;display=swap"><style id="all-fonts-style-font-merriweather">
-      .font-merriweather { font-family: 'Merriweather', serif !important; }
-    </style><link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-bricolage">
-      .font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }
-    </style><link id="all-fonts-link-font-jakarta" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-jakarta">
-      .font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif !important; }
-    </style><link id="all-fonts-link-font-manrope" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-manrope">
-      .font-manrope { font-family: 'Manrope', sans-serif !important; }
-    </style><link id="all-fonts-link-font-space-grotesk" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-space-grotesk">
-      .font-space-grotesk { font-family: 'Space Grotesk', sans-serif !important; }
-    </style><link id="all-fonts-link-font-work-sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-work-sans">
-      .font-work-sans { font-family: 'Work Sans', sans-serif !important; }
-    </style><link id="all-fonts-link-font-pt-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&amp;display=swap"><style id="all-fonts-style-font-pt-serif">
-      .font-pt-serif { font-family: 'PT Serif', serif !important; }
-    </style><link id="all-fonts-link-font-geist-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist-mono">
-      .font-geist-mono { font-family: 'Geist Mono', monospace !important; }
-    </style><link id="all-fonts-link-font-space-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;display=swap"><style id="all-fonts-style-font-space-mono">
-      .font-space-mono { font-family: 'Space Mono', monospace !important; }
-    </style><link id="all-fonts-link-font-quicksand" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-quicksand">
-      .font-quicksand { font-family: 'Quicksand', sans-serif !important; }
-    </style><link id="all-fonts-link-font-nunito" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-nunito">
-      .font-nunito { font-family: 'Nunito', sans-serif !important; }
-    </style><link id="all-fonts-link-font-newsreader" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..800&amp;display=swap"><style id="all-fonts-style-font-newsreader">
-      .font-newsreader { font-family: 'Newsreader', serif !important; }
-    </style><link id="all-fonts-link-font-google-sans-flex" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-google-sans-flex">
-      .font-google-sans-flex { font-family: 'Google Sans Flex', sans-serif !important; }
-    </style><link id="all-fonts-link-font-oswald" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-oswald">
-      .font-oswald { font-family: 'Oswald', sans-serif !important; }
-    </style><link id="all-fonts-link-font-dm-sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-dm-sans">
-      .font-dm-sans { font-family: 'DM Sans', sans-serif !important; }
-    </style><link id="all-fonts-link-font-cormorant" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-cormorant">
-      .font-cormorant { font-family: 'Cormorant Garamond', serif !important; }
-    </style><style id="border-gradient-shared-style">
+  <style id="border-gradient-shared-style">
   [style*="--border-gradient"]::before {
     content: "";
     position: absolute;
@@ -212,8 +170,8 @@
 
     <!-- Tagline -->
     <p class="animate-fade-up delay-200 mt-4 md:mt-6 md:text-lg md:mb-12 leading-relaxed text-sm font-light text-gray-500 font-manrope text-center max-w-2xl mr-auto mb-8 ml-auto">
-      You only pay after the intro call, once you confirm they
-      match your criteria.
+      You only pay for intro calls that take place and match
+      your criteria.
     </p>
 
     <!-- Video Box -->
@@ -404,8 +362,8 @@
           You Only Pay When It's Confirmed
         </h3>
         <p class="leading-snug md:leading-relaxed z-10 md:text-base md:pr-0 text-sm font-light text-gray-500 font-manrope pr-4 relative">
-          After the call, you confirm the owner matched the brief we sent, and
-          you only pay once they meet your criteria.
+          After the call you confirm the owner matched the brief. If they
+          didn't, it doesn't count and it doesn't cost you.
         </p>
         <div class="absolute -bottom-3 -right-3 md:relative md:bottom-auto md:right-auto md:mt-auto md:pt-6 self-end transition-colors duration-500 transform group-hover:scale-110 group-hover:text-blue-500 text-blue-100 z-0 opacity-40 md:opacity-100 pointer-events-none md:pointer-events-auto">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shield-check" aria-hidden="true" class="lucide lucide-shield-check md:w-24 md:h-24 stroke-[1px] w-[64px] h-[64px]" data-icon-replaced="true" style="color: rgb(59, 130, 246); width: 64px; height: 64px;"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg>
@@ -585,7 +543,7 @@
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check" aria-hidden="true" class="lucide lucide-check w-3.5 h-3.5 md:w-5 md:h-5"><path d="M20 6 9 17l-5-5"></path></svg>
                 </div>
                 <span class="md:text-lg font-bold text-gray-900 font-manrope border-blue-200 border-b-2 text-sm">
-                      Performance-Based Pricing
+                      Pay Per Qualified Intro Call
                     </span>
               </li>
             </ul>
@@ -657,10 +615,8 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down md:w-5 md:h-5 transition-transform group-open:rotate-180 w-[16px] h-[16px] shrink-0 ml-4" data-icon-replaced="true" style="color: rgb(156, 163, 175); width: 16px; height: 16px;"><path d="m6 9 6 6 6-6"></path></svg>
       </summary>
       <div class="px-5 md:px-6 pb-6 text-base text-gray-500 leading-relaxed font-light border-t pt-4 border-gray-100 font-manrope">
-        On our onboarding call, we agree on exactly what your criteria are
-        for a qualified lead. We only send you owners who meet those
-        criteria, so after the intro call you can confirm they matched your
-        expectations. If they don't, you don't pay.
+        You set the criteria on the onboarding call. We only book owners who
+        meet them. If one doesn't, it doesn't count and it doesn't cost you.
       </div>
     </details>
 
@@ -671,11 +627,9 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down md:w-5 md:h-5 transition-transform group-open:rotate-180 w-[16px] h-[16px] shrink-0 ml-4" data-icon-replaced="true" style="color: rgb(156, 163, 175); width: 16px; height: 16px;"><path d="m6 9 6 6 6-6"></path></svg>
       </summary>
       <div class="md:px-6 leading-relaxed text-base font-light text-gray-500 font-manrope border-gray-100 border-t pt-4 pr-5 pb-6 pl-5">
-        Pricing is performance-based: you pay per intro call, once the call
-        has taken place and you've confirmed the owner matches the brief we
-        sent. If they don't meet your criteria, you don't pay. The price per
-        call varies depending on the size of the business you're meeting
-        with, and we confirm all pricing on the discovery call.
+        A flat fee per qualified intro call. You only pay for calls that take
+        place and match your criteria.
+        <a href="/pricing" class="underline transition-all decoration-blue-200 hover:decoration-blue-600 text-blue-700">View our pricing page here</a>.
       </div>
     </details>
 
@@ -686,10 +640,9 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down md:w-5 md:h-5 transition-transform group-open:rotate-180 w-[16px] h-[16px] shrink-0 ml-4" data-icon-replaced="true" style="width: 16px; height: 16px; color: rgb(156, 163, 175);"><path d="m6 9 6 6 6-6"></path></svg>
       </summary>
       <div class="px-5 md:px-6 pb-6 text-base text-gray-500 leading-relaxed font-light border-t pt-4 border-gray-100 font-manrope">
-        We always have campaigns running, so depending on your industry, you
-        could start seeing booked calls within the first week. On the
-        discovery call, we can give you a clearer expected timeline once we
-        understand who you target.
+        We always have campaigns running, so depending on your industry you
+        could see booked calls in the first week. We'll give you a clearer
+        timeline on the call.
       </div>
     </details>
 
@@ -700,11 +653,9 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down w-4 h-4 md:w-5 md:h-5 transition-transform group-open:rotate-180 text-gray-400 shrink-0 ml-4"><path d="m6 9 6 6 6-6"></path></svg>
       </summary>
       <div class="px-5 md:px-6 pb-6 text-base text-gray-500 leading-relaxed font-light border-t pt-4 border-gray-100 font-manrope">
-        Most providers hand you a name and contact details and wish you
-        luck, even though many aren't real sellers. We speak to every owner
-        first, qualify them against your criteria, write you a brief, and
-        book the call into your calendar. You only pay once you've confirmed
-        the lead was qualified.
+        Most providers hand you contact details and wish you luck. We speak to
+        every owner, qualify them against your criteria, brief you, and book
+        the call. You only pay for the ones that count.
       </div>
     </details>
 
@@ -715,12 +666,9 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down md:w-5 md:h-5 transition-transform group-open:rotate-180 w-[16px] h-[16px] shrink-0 ml-4" data-icon-replaced="true" style="width: 16px; height: 16px; color: rgb(156, 163, 175);"><path d="m6 9 6 6 6-6"></path></svg>
       </summary>
       <div class="md:px-6 leading-relaxed text-base font-light text-gray-500 font-manrope border-gray-100 border-t pt-4 pr-5 pb-6 pl-5">
-        We can tailor outreach to most industries, and we currently run
-        evergreen campaigns across trades and construction, industrial and
-        logistics, professional services, business services, technology, and
-        healthcare and practices. If you operate in any of these, it works.
-        The one requirement is that the owners are US-based, since that's
-        where we operate.
+        We run evergreen campaigns across trades and construction, industrial
+        and logistics, professional services, business services, technology,
+        and healthcare. Owners need to be US-based. If that's you, it works.
       </div>
     </details>
 
@@ -731,10 +679,8 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-down" aria-hidden="true" class="lucide lucide-chevron-down w-4 h-4 md:w-5 md:h-5 transition-transform group-open:rotate-180 text-gray-400 shrink-0 ml-4"><path d="m6 9 6 6 6-6"></path></svg>
       </summary>
       <div class="px-5 md:px-6 pb-6 text-base text-gray-500 leading-relaxed font-light border-t pt-4 border-gray-100 font-manrope">
-        If your niche isn't one we're already running, we can usually build
-        outreach for it, as long as the owners are US-based businesses. The
-        quickest way to find out is a short discovery call: tell us the
-        industries you cover and we'll confirm what we can source.
+        We can usually build outreach for it, as long as the owners are
+        US-based. Quickest way to find out is a short call.
       </div>
     </details>
   </div>
@@ -781,13 +727,13 @@
     </div>
     <div class="w-full rounded-[2rem] border shadow-sm overflow-hidden bg-white border-gray-200">
       <!-- Calendly inline widget begin -->
-      <div class="calendly-inline-widget w-full" data-url="https://calendly.com/jonathan-coldclick/disco?hide_gdpr_banner=1&amp;primary_color=e11d48" style="position: relative;min-width: 100%; height: 1000px; width: 100%;" data-processed="true">
+      <div class="calendly-inline-widget w-full" data-url="https://calendly.com/jonathan-coldclick/disco?hide_gdpr_banner=1&amp;primary_color=3b82f6" style="position: relative;min-width: 100%; height: 1000px; width: 100%;" data-processed="true">
         <div class="calendly-spinner">
           <div class="calendly-bounce1"></div>
           <div class="calendly-bounce2"></div>
           <div class="calendly-bounce3"></div>
         </div>
-        <iframe src="https://calendly.com/jonathan-coldclick/disco?embed_domain=&amp;embed_type=Inline&amp;hide_gdpr_banner=1&amp;primary_color=e11d48" width="100%" height="100%" frameborder="0" title="Select a Date &amp; Time - Calendly" class=""></iframe>
+        <iframe src="https://calendly.com/jonathan-coldclick/disco?embed_domain=&amp;embed_type=Inline&amp;hide_gdpr_banner=1&amp;primary_color=3b82f6" width="100%" height="100%" frameborder="0" title="Select a Date &amp; Time - Calendly" class=""></iframe>
       </div>
       <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async=""></script>
       <!-- Calendly inline widget end -->
@@ -826,7 +772,13 @@
   </div>
 
   <div class="max-w-7xl mx-auto mt-12 md:mt-16 pt-8 border-t text-center text-[10px] md:text-xs border-gray-100 text-gray-400 font-manrope">
-    <p class="font-manrope">© 2026 Coldclick Consulting Ltd. All rights reserved.</p>
+    <p class="font-manrope">
+      © 2026 Coldclick Consulting Ltd. All rights reserved.
+      <span class="mx-1.5 text-gray-300">·</span>
+      <a href="/privacy" target="_blank" rel="noopener" class="underline underline-offset-2 transition-colors hover:text-gray-600">Privacy policy</a>
+      <span class="mx-1.5 text-gray-300">·</span>
+      <a href="/terms" target="_blank" rel="noopener" class="underline underline-offset-2 transition-colors hover:text-gray-600">Terms of use</a>
+    </p>
   </div>
 </footer>
 
